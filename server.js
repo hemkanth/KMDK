@@ -4,7 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var path = require('path');
-
+// Change
 // import necessary js files
 var ErrorManagement = require('./server/handling/ErrorHandling.js');
 var LogManagement = require('./server/handling/LogHandling.js');
