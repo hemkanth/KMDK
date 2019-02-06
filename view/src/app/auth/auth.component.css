@@ -1,0 +1,48 @@
+.auth-page
+{
+    width:78%;
+    margin-left:15%;
+    margin-top:100px;
+}
+.btn
+{
+    width:125px;
+    font-size: 13px;
+    padding: 5px;
+}
+input
+{
+    padding: 5px;
+    font-size: 16px;
+}
+h1{
+    text-align: center;
+}
+.right-btn
+{
+    float: right;
+}
+.bottomlink
+{
+    margin-top:20px;
+}
+.bottomlink a{
+    color:#256919;
+    font-size: 13px;
+    line-height: 30px;
+    padding-right: 30px;
+}
+.bg-image
+{
+    width:50%;
+    position:absolute;
+}
+.bg-image img{
+    height: 545px;
+    width:550px;
+    /* border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%; */
+}

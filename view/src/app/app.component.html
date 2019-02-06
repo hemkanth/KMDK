@@ -1,0 +1,134 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="header-main">
+  <div class="Header_Section">
+    <div class="col-sm-12 main_header">      
+        <div class="side-bar">
+            <img src="../assets/images/logo-flag.png" />
+        </div>
+        <div class="logo">
+          <img src="../assets/images/logo.png" />
+          <div class="right-icon">                        
+                <i class="fa fa-bell" [matMenuTriggerFor]="menu"> </i><span class="notify">10</span>
+                <mat-menu #menu="matMenu" class="top-notify">
+                        <a mat-menu-item>
+                            <div class="notify-content">
+                            <p>New Member Registered - Member Name</p> 
+                            <p class="notify-timing">2 Hours ago</p>
+                            </div>                      
+                        </a>
+                        <a mat-menu-item>
+                            <div class="notify-content">
+                                <p>New Event Added - Event Name</p> 
+                                <p class="notify-timing">5 Hours ago</p>
+                            </div>                      
+                        </a>   
+                        <a mat-menu-item>
+                            <div class="notify-content">
+                                <p>New Complaint Registered - Member Name</p> 
+                                <p class="notify-timing">10 Hours ago</p>
+                            </div>                      
+                        </a>   
+                        <a mat-menu-item>
+                            <div class="notify-content">
+                                <p>New District Added - District Name</p> 
+                                <p class="notify-timing">1 Day ago</p>
+                            </div>                      
+                        </a>      
+                        <a mat-menu-item>
+                            <div class="notify-content">
+                                <p>New Enquiry Registered - Member Name</p> 
+                                <p class="notify-timing">3 Days ago</p>
+                            </div>                      
+                        </a>                         
+                      </mat-menu> 
+                <a href="#">நிர்வாகி</a>
+            </div>            
+        </div>
+        
+      </div>
+  </div>
+  <div class="Nav_Section">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="side_nav">
+                <ul class="nav-menu">
+                    <a [routerLink]="['/dashboard']"><li>புள்ளிவிவரங்கள்</li></a>                
+                    <div class="dropdown">
+                        <button class="dropbtn">உறுப்பினர்கள் 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a [routerLink]="['/members-list']">உறுப்பினர்கள் </a>
+                          <a [routerLink]="['/member-approval-list']">உறுப்பினர் ஒப்புதல்</a>
+                          <a [routerLink]="['/member-approved-list']">நிலுவையிலுள்ள கோரிக்கைகள்</a>
+                          <a [routerLink]="['/member-rejected-list']" routerLinkActive="router-link-active">நிராகரிக்கப்பட்ட உறுப்பினர்கள்</a>
+                          <!-- <a href="#">உறுப்பினர்கள் அறிக்கை</a> -->
+                          <a [routerLink]="['/member-idcard-print']">அடையாள அட்டை அச்சிடல்</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">நிர்வாகிகள் 
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/officials-list']">நிர்வாகிகள்</a>
+                            <a href="#">நிர்வாகிகள் அறிக்கை</a>
+                        </div>
+                    </div> 
+                    <a [routerLink]="['/events-list']"><li>நிகழ்வுகள்</li></a>
+                    <a [routerLink]="['/registered-complaints-list']"><li>புகார்கள்</li></a>
+                    <!-- <div class="dropdown">
+                        <button class="dropbtn">புகார்கள் 
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/registered-complaints-list']">புகார்கள் பதிவு </a>
+                            <a [routerLink]="['/addressed-complaints-list']">கூறப்பட்ட புகார்கள்</a>
+                        </div>
+                    </div>      -->
+                    <a [routerLink]="['/gallery-list']"><li>புகைப்பட தொகுப்பு</li></a>
+                    <a [routerLink]="['/downloads']"><li>பதிவிறக்கம்</li></a>            
+                    <a [routerLink]="['/advertisement-list']"><li>செய்தி தொகுப்பு</li></a>
+                    <!--<a [routerLink]="['/dashboard']"><li>கட்சி சேர்ப்பு</li></a>                                
+                    <a [routerLink]="['/activity']"><li>நடவடிக்கைகள்</li></a> -->
+                    <a [routerLink]="['/enquiry-list']"><li>விசாரணைகள்</li></a>  
+                    <a [routerLink]="['/division-officials']"><li>அணி நிர்வாகிகள்</li></a> 
+                    <a [routerLink]="['/branch-certificate']"><li>கிளை சான்றிதழ்</li></a>
+                    <a [routerLink]="['/dashboard']"><li>குடிமகன் பதிவு</li></a>                 
+                    <!-- <div class="dropdown">
+                        <button class="dropbtn">குடிமகன் பதிவு 
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/district-list']">பயன்பாடு நிரல் இடைமுகம் </a>
+                            <a [routerLink]="['/zone-list']">படம்</a>                        
+                        </div>
+                    </div>            -->
+                    <div class="dropdown">
+                        <button class="dropbtn">கட்டமைப்பு 
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/district-list']">மாவட்டம் </a>
+                            <a [routerLink]="['/zone-list']">மண்டலம்</a>
+                            <a [routerLink]="['/branch-list']">கிளை</a>
+                            <a [routerLink]="['/constituency-list']">தொகுதி</a>
+                            <a [routerLink]="['/division-list']">அணி </a>
+                            <a [routerLink]="['/official-designation']" routerLinkActive="router-link-active" >நிர்வாகி பதவி</a>
+                            <a [routerLink]="['/member-approval-period']" routerLinkActive="router-link-active" >உறுப்பினர் ஒப்புதல் காலம்</a>
+                            <a [routerLink]="['/state-list']" routerLinkActive="router-link-active" >மாநிலங்கள்</a>
+                            <a [routerLink]="['/complaint-category']" routerLinkActive="router-link-active" >புகார் வகைகள்</a>
+                            <a [routerLink]="['/advertisement-type']" routerLinkActive="router-link-active" >விளம்பர வகைகள்</a>
+                            <a [routerLink]="['/booth-list']" routerLinkActive="router-link-active" >சாவடி</a>
+                        </div>
+                    </div>
+                     <a [routerLink]="['/dashboard']"><li>பயனர் மேலாண்மை</li></a>               
+                    <a [routerLink]="['/dashboard']"><li>பயனர் அனுமதி</li></a> 
+                     
+                </ul> 
+            </div>
+          </div>      
+        </div>
+      </div>
+</div>
+  <router-outlet></router-outlet>

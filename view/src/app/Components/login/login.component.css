@@ -1,0 +1,40 @@
+.Login-Section
+{
+    width: 78%;
+    /* margin-left:20%; */
+    z-index: 1000;
+}
+.frm-field
+{
+    width:100%;
+    float: left;
+    margin-bottom: 10px;
+}
+.frm-field input
+{
+    padding:5px;
+    width:80%;
+    font-size: 12px;
+    text-align: left;
+    border:1px solid #d2cdcd;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+}
+.frm-field span{
+    width:50px;
+}
+.frm-lbl
+{
+    width: 28%;
+    float: left;
+    font-size: 12px;
+    text-align: left;
+}
+.frm-input
+{
+    width: 72%;
+    float: left;    
+}

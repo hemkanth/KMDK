@@ -1,0 +1,22 @@
+<div class="District_Section"> 
+    <div class="side-heading">
+      <h3>உறுப்பினர் ஒப்புதல் காலம்</h3>      
+      <div class="member">
+        <form [formGroup]="updateForm">
+          <div class="frm-field">
+            <div class="frm-lbl">காலம் தேர்வு</div>
+            <div class="frm-input col-md-5">                   
+              <ng-select class="ng-select ng-select-single"
+              [items]="Dayslist"
+              [bindLabel]="'label'"
+              [bindValue]="'value'"
+              placeholder="காலம் தேர்வு"></ng-select>
+            </div>
+          </div>
+          <div class="frm-field">
+              <button class="btn btn-success update-button">மேம்படுத்தல்</button>
+          </div>
+        </form>
+      </div>
+    </div>  
+  </div>

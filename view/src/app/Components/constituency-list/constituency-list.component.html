@@ -1,0 +1,347 @@
+<div class="Constituency_Section">
+  <mat-tab-group>
+    <mat-tab label="சட்டமன்ற தொகுதி"> 
+      <button type="button" class="btn btn-success create-btn" (click)="openCreateassemblyModal(createassemblytemplate)">புதிய சட்டமன்றத்தைச் சேர்க்கவும்</button>
+      <div class="table_section">
+          <table>
+            <thead>
+              <tr>
+                <th>வ.எண்</th>
+                <th>பெயர்</th>            
+                <th>நடவடிக்கை</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td class="nme">கோயம்புத்தூர்</td>           
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="openViewassemblyModal(viewassemblytemplate)"><i class="fa fa-eye"></i></button>
+                    <button type="button" class="btn btn-warning" (click)="openEditassemblyModal(editassemblytemplate)"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger" (click)="openDeleteassemblyModal(deleteassemblytemplate)"><i class="fa fa-trash"></i></button>                
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td class="nme">நாமக்கல்</td>           
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="openViewassemblyModal(viewassemblytemplate)"><i class="fa fa-eye"></i></button>
+                    <button type="button" class="btn btn-warning" (click)="openEditassemblyModal(editassemblytemplate)"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger" (click)="openDeleteassemblyModal(deleteassemblytemplate)"><i class="fa fa-trash"></i></button>                
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td class="nme">மதுரை</td>              
+                  <td>
+                      <button type="button" class="btn btn-primary" (click)="openViewassemblyModal(viewassemblytemplate)"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-warning" (click)="openEditassemblyModal(editassemblytemplate)"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" (click)="openDeleteassemblyModal(deleteassemblytemplate)"><i class="fa fa-trash"></i></button>                
+                    </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td class="nme">பொள்ளாச்சி</td>              
+                  <td>
+                      <button type="button" class="btn btn-primary" (click)="openViewassemblyModal(viewassemblytemplate)"><i class="fa fa-eye"></i></button>
+                    <button type="button" class="btn btn-warning" (click)="openEditassemblyModal(editassemblytemplate)"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger" (click)="openDeleteassemblyModal(deleteassemblytemplate)"><i class="fa fa-trash"></i></button>                
+                    </td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td class="nme">கரூர்</td>             
+                  <td>                                 
+                      <button type="button" class="btn btn-primary" (click)="openViewassemblyModal(viewassemblytemplate)"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-warning" (click)="openEditassemblyModal(editassemblytemplate)"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" (click)="openDeleteassemblyModal(deleteassemblytemplate)"><i class="fa fa-trash"></i></button>                              
+                      <!-- Delete Modal  -->
+                      <ng-template #deleteassemblytemplate>
+                          <div class="modal-header">
+                              <h4 class="modal-title pull-left modalheading">சட்டமன்ற தொகுதி நீக்கு </h4>
+                            </div>
+                          <div class="modal-body text-center del-title">
+                            <p>நீங்கள் உறுதிப்படுத்த விரும்புகிறீர்களா</p>
+                            <button type="button" class="btn btn-success modelbtn" (click)="confirm()" >ஆம்</button>
+                            <button type="button" class="btn btn-danger modelbtn" (click)="decline()" >இல்லை</button>
+                          </div>
+                        </ng-template>
+                        <!-- Delete Modal  -->
+                      <ng-template #editassemblytemplate>
+                        <div class="modal-header">
+                          <h4 class="modal-title pull-left modalheading">சட்டமன்ற தொகுதி மேம்படுத்தல்</h4>
+                        </div>
+                          <div class="modal-body text-center">
+                              <div class="form-section">
+                                <form [formGroup]="editForm">                                                      
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">சட்டமன்ற தொகுதி </div>
+                                      <div class="frm-input"><input formControlName="District" /></div>
+                                  </div>  
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">கிளை </div>
+                                      <div class="frm-input">
+                                          <ng-select class="ng-select ng-select-multiple" 
+                                          [items]="Branchlist"
+                                          [bindLabel]="'label'"
+                                          [bindValue]="'value'"
+                                          placeholder="கிளை தேர்வு">
+                                        </ng-select>    
+                                      </div>
+                                  </div>  
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">விளக்கம் </div>
+                                      <div class="frm-input"><textarea></textarea></div>
+                                  </div>                                  
+                                </form>                         
+                              </div>
+                          </div>
+                          <div class="modal-footer border-btm">
+                            <div class="frm-field">
+                                <button class="btn btn-success update-button">மேம்படுத்தல்</button>
+                            </div>
+                          </div>
+                        </ng-template>
+                        <!-- Create New Assembly-->
+                        <ng-template #createassemblytemplate>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left modalheading">சட்டமன்ற தொகுதி சேர்க்க</h4>
+                            </div>
+                              <div class="modal-body text-center">
+                                  <div class="form-section">
+                                    <form [formGroup]="editForm">                                                      
+                                      <div class="frm-field">
+                                          <div class="frm-lbl">சட்டமன்ற தொகுதி </div>
+                                          <div class="frm-input"><input formControlName="District" /></div>
+                                      </div>    
+                                      <div class="frm-field">
+                                          <div class="frm-lbl">கிளை </div>
+                                          <div class="frm-input">
+                                              <ng-select class="ng-select ng-select-multiple" 
+                                              [items]="Branchlist"
+                                              [bindLabel]="'label'"
+                                              [bindValue]="'value'"
+                                              placeholder="கிளை தேர்வு">
+                                            </ng-select>    
+                                          </div>
+                                      </div>  
+                                      <div class="frm-field">
+                                          <div class="frm-lbl">விளக்கம் </div>
+                                          <div class="frm-input"><textarea></textarea></div>
+                                      </div>                              
+                                    </form>                         
+                                  </div>
+                              </div>
+                              
+                              <div class="modal-footer border-btm">
+                                <div class="frm-field">
+                                    <button class="btn btn-success submit-button">சமர்ப்பிக்க</button>
+                                </div>
+                              </div>
+                            </ng-template>
+                        <!-- View Modal -->
+                      <ng-template #viewassemblytemplate>
+                          <div class="modal-header">
+                            <h4 class="modal-title pull-left modalheading">சட்டமன்ற தொகுதி விவரம்</h4>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="form-section">
+                                  <div class="form">                              
+                                    <div class="icon">                                                               
+                                        <p>பெயர் : நாமக்கல்</p>  
+                                        <p>கிளை : </p>                                 
+                                        <p>விளக்கம் : </p>
+                                    </div>                              
+                                  </div>
+                                </div>
+                          </div>
+                        </ng-template>                                                            
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+          <mat-paginator [length]="length"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="pageEvent = $event">
+          </mat-paginator>
+      </div>
+    </mat-tab>
+    <mat-tab label="பாராளுமன்ற தொகுதி">   
+      <button type="button" class="btn btn-success create-btn" (click)="openCreateparlimentModal(createparlimenttemplate)">புதிய பாராளுமன்றத்தைச் சேர்க்கவும்</button>       
+      <div class="table_section">
+          <table>
+            <thead>
+              <tr>
+                <th>வ.எண்</th>
+                <th>பெயர்</th>            
+                <th>நடவடிக்கை</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td class="nme">கோயம்புத்தூர்</td>           
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="openViewparlimentModal(viewparlimenttemplate)"><i class="fa fa-eye"></i></button>
+                    <button type="button" class="btn btn-warning" (click)="openEditparlimentModal(editparlimenttemplate)"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger" (click)="openDeleteparlimentModal(deleteparlimenttemplate)"><i class="fa fa-trash"></i></button>                                
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td class="nme">நாமக்கல்</td>           
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="openViewparlimentModal(viewparlimenttemplate)"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-warning" (click)="openEditparlimentModal(editparlimenttemplate)"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" (click)="openDeleteparlimentModal(deleteparlimenttemplate)"><i class="fa fa-trash"></i></button>                               
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td class="nme">மதுரை</td>              
+                  <td>
+                      <button type="button" class="btn btn-primary" (click)="openViewparlimentModal(viewparlimenttemplate)"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-warning" (click)="openEditparlimentModal(editparlimenttemplate)"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" (click)="openDeleteparlimentModal(deleteparlimenttemplate)"><i class="fa fa-trash"></i></button>                               
+                    </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td class="nme">பொள்ளாச்சி</td>              
+                  <td>
+                      <button type="button" class="btn btn-primary" (click)="openViewparlimentModal(viewparlimenttemplate)"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-warning" (click)="openEditparlimentModal(editparlimenttemplate)"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" (click)="openDeleteparlimentModal(deleteparlimenttemplate)"><i class="fa fa-trash"></i></button>                                
+                      <!-- <a name="view" href="#" class="btn-blue"><i class="fa fa-eye"></i></a>
+                      <a name="update" href="#" class="btn-orange"><i class="fa fa-edit"></i></a>
+                      <a name="delete" href="#" class="btn-red"><i class="fa fa-trash"></i></a> -->
+                    </td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td class="nme">கரூர்</td>             
+                  <td>                                 
+                      <button type="button" class="btn btn-primary" (click)="openViewparlimentModal(viewparlimenttemplate)"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-warning" (click)="openEditparlimentModal(editparlimenttemplate)"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" (click)="openDeleteparlimentModal(deleteparlimenttemplate)"><i class="fa fa-trash"></i></button>                
+                      <!-- Delete Modal  -->
+                      <ng-template #deleteparlimenttemplate>
+                          <div class="modal-header">
+                              <h4 class="modal-title pull-left modalheading">பாராளுமன்ற தொகுதி நீக்கு </h4>
+                            </div>
+                          <div class="modal-body text-center del-title">
+                            <p>நீங்கள் உறுதிப்படுத்த விரும்புகிறீர்களா</p>
+                            <button type="button" class="btn btn-success modelbtn" (click)="confirm()" >ஆம்</button>
+                            <button type="button" class="btn btn-danger modelbtn" (click)="decline()" >இல்லை</button>
+                          </div>
+                        </ng-template>
+                        <!-- Delete Modal  -->
+                      <ng-template #editparlimenttemplate>
+                        <div class="modal-header">
+                          <h4 class="modal-title pull-left modalheading">பாராளுமன்ற தொகுதி மேம்படுத்தல்</h4>
+                        </div>
+                          <div class="modal-body text-center">
+                              <div class="form-section">
+                                <form [formGroup]="editForm">                                                      
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">பாராளுமன்ற தொகுதி </div>
+                                      <div class="frm-input"><input formControlName="District" /></div>
+                                  </div>    
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">சட்டமன்ற தொகுதி</div>
+                                      <div class="frm-input">
+                                          <ng-select class="ng-select ng-select-multiple" 
+                                            [items]="myOptions"
+                                            [bindLabel]="'label'"
+                                            [bindValue]="'value'"
+                                            placeholder="சட்டமன்ற தொகுதி தேர்வு">
+                                          </ng-select>                     
+                                        </div>    
+                                  </div> 
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">விளக்கம் </div>
+                                      <div class="frm-input"><textarea></textarea></div>
+                                  </div>         
+                                                  
+                                </form>                         
+                              </div>
+                          </div>
+                          <div class="modal-footer border-btm">
+                            <div class="frm-field">
+                                <button class="btn btn-success update-button">மேம்படுத்தல்</button>
+                            </div>
+                          </div>
+                        </ng-template>
+                        <!-- Create New parliment-->
+                        <ng-template #createparlimenttemplate>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left modalheading">பாராளுமன்ற தொகுதி சேர்க்க</h4>
+                            </div>
+                              <div class="modal-body text-center">
+                                  <div class="form-section">
+                                    <form [formGroup]="editForm">                                                      
+                                      <div class="frm-field">
+                                          <div class="frm-lbl">பாராளுமன்ற தொகுதி </div>
+                                          <div class="frm-input"><input formControlName="District" /></div>
+                                      </div>   
+                                      <div class="frm-field">
+                                          <div class="frm-lbl">சட்டமன்ற தொகுதி </div>
+                                          <div class="frm-input">
+                                              <ng-select class="ng-select ng-select-multiple" 
+                                                [items]="myOptions"
+                                                [bindLabel]="'label'"
+                                                [bindValue]="'value'"
+                                                placeholder="சட்டமன்றம் தேர்வு">
+                                              </ng-select>                             
+                                            </div>    
+                                      </div>       
+                                      <div class="frm-field">
+                                          <div class="frm-lbl">விளக்கம் </div>
+                                          <div class="frm-input"><textarea></textarea></div>
+                                      </div>                              
+                                    </form>                         
+                                  </div>
+                              </div>
+                              <div class="modal-footer border-btm">
+                                <div class="frm-field">
+                                    <button class="btn btn-success update-button">சமர்ப்பிக்க</button>
+                                </div>
+                              </div>
+                            </ng-template>
+                        <!-- View Modal -->
+                      <ng-template #viewparlimenttemplate>
+                          <div class="modal-header">
+                            <h4 class="modal-title pull-left modalheading">பாராளுமன்ற தொகுதி விவரம்</h4>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="form-section">
+                                  <div class="form">                              
+                                    <div class="icon">                                                               
+                                        <p>பெயர் : நாமக்கல்</p>                                   
+                                    </div>                              
+                                  </div>
+                                </div>
+                          </div>
+                        </ng-template>
+                        <!--  Create New District -->
+                        
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+          <mat-paginator [length]="length"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="pageEvent = $event">
+          </mat-paginator>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

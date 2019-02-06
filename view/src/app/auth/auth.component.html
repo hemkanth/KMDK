@@ -1,0 +1,46 @@
+<div class="bg-image">
+  <img src="../../assets/images/bg1.jpg" />
+</div>
+<div class="auth-page">
+    <div class="container page">
+      <div class="row">
+  
+        <div class="col-md-6 offset-md-5 col-xs-12">
+          <h1 class="text-xs-center">நிர்வாக உள்நுழைவு</h1>        
+          <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+            <fieldset [disabled]="isSubmitting">
+              <fieldset class="form-group">
+                <input
+                  formControlName="username"
+                  placeholder="Username"
+                  class="form-control form-control-lg"
+                  type="text"
+                  *ngIf="authType == 'register'" />
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  formControlName="email"
+                  placeholder="Email"
+                  class="form-control form-control-lg"
+                  type="text" />
+              </fieldset>
+              <fieldset class="form-group">
+                <input
+                  formControlName="password"
+                  placeholder="Password"
+                  class="form-control form-control-lg"
+                  type="password" />
+              </fieldset>
+              <button class="btn btn-lg btn-success pull-xs-right right-btn" type="submit" [routerLink]="['/dashboard']">உள்நுழை</button>
+            </fieldset>
+          </form>
+          <div class="bottomlink">
+              <a [routerLink]="['/login']">ஒரு கணக்கு இருக்கிறதா?</a>
+              <a [routerLink]="['/register']">ஒரு கணக்கு தேவையா?</a>
+          </div>
+    
+        </div>
+  
+      </div>
+    </div>
+  </div>

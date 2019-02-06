@@ -1,0 +1,209 @@
+.Dashboard_Section {
+    width: 78%;
+    margin-left: 20%; 
+}
+.side-heading
+{
+    margin-top:30px;
+}
+.side-heading h3{
+    color: #4CAF50;
+    font-size: 16px;
+    font-weight: 800;
+}
+.card {
+    margin-bottom: 1.875rem;
+    border: none;
+    border-radius: 0;
+    -webkit-box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+    box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+}
+.bg-primary.bg-darken-2 {
+    background-color: #00A5A8 !important;
+}
+.bg-gradient-x-primary {
+    background-image: -webkit-gradient(linear,left top,right top,from(#00A5A8),to(#4DCBCD));
+    background-image: -webkit-linear-gradient(left,#00A5A8 0,#4DCBCD 100%);
+    background-image: -moz-linear-gradient(left,#00A5A8 0,#4DCBCD 100%);
+    background-image: -o-linear-gradient(left,#00A5A8 0,#4DCBCD 100%);
+    background-image: linear-gradient(to right,#00A5A8 0,#4DCBCD 100%);
+    background-repeat: repeat-x;
+}
+.bg-danger.bg-darken-2 {
+    background-color: #FF6275 !important;
+}
+.bg-gradient-x-danger {
+    background-image: -webkit-gradient(linear,left top,right top,from(#FF6275),to(#FF9EAC));
+    background-image: -webkit-linear-gradient(left,#FF6275 0,#FF9EAC 100%);
+    background-image: -moz-linear-gradient(left,#FF6275 0,#FF9EAC 100%);
+    background-image: -o-linear-gradient(left,#FF6275 0,#FF9EAC 100%);
+    background-image: linear-gradient(to right,#FF6275 0,#FF9EAC 100%);
+    background-repeat: repeat-x;
+}
+.p-2 {
+    padding:1.5rem .5rem 1.5rem .5rem !important;
+}
+.white h5{
+    font-size:15px;
+}
+.white {
+    color: #FFFFFF;
+    font-size:50px;
+}
+.bg-warning.bg-darken-2 {
+    background-color: #FF976A !important;
+}
+.bg-gradient-x-warning {
+    background-image: -webkit-gradient(linear,left top,right top,from(#FF976A),to(#FFC2A4));
+    background-image: -webkit-linear-gradient(left,#FF976A 0,#FFC2A4 100%);
+    background-image: -moz-linear-gradient(left,#FF976A 0,#FFC2A4 100%);
+    background-image: -o-linear-gradient(left,#FF976A 0,#FFC2A4 100%);
+    background-image: linear-gradient(to right,#FF976A 0,#FFC2A4 100%);
+    background-repeat: repeat-x;
+}
+.bg-success.bg-darken-2 {
+    background-color: #10C888 !important;
+}
+.bg-gradient-x-success {
+    background-image: -webkit-gradient(linear,left top,right top,from(#10C888),to(#5CE0B8));
+    background-image: -webkit-linear-gradient(left,#10C888 0,#5CE0B8 100%);
+    background-image: -moz-linear-gradient(left,#10C888 0,#5CE0B8 100%);
+    background-image: -o-linear-gradient(left,#10C888 0,#5CE0B8 100%);
+    background-image: linear-gradient(to right,#10C888 0,#5CE0B8 100%);
+    background-repeat: repeat-x;
+}
+.bg-success.bg-darken-2 {
+    background-color: #10C888 !important;
+}
+.bg-gradient-x-success {
+    background-image: -webkit-gradient(linear,left top,right top,from(#10C888),to(#5CE0B8));
+    background-image: -webkit-linear-gradient(left,#10C888 0,#5CE0B8 100%);
+    background-image: -moz-linear-gradient(left,#10C888 0,#5CE0B8 100%);
+    background-image: -o-linear-gradient(left,#10C888 0,#5CE0B8 100%);
+    background-image: linear-gradient(to right,#10C888 0,#5CE0B8 100%);
+    background-repeat: repeat-x;
+}
+.bg-success.bg-darken-2 {
+    background-color: #10C888 !important;
+}
+.bg-gradient-x-success {
+    background-image: -webkit-gradient(linear,left top,right top,from(#10C888),to(#5CE0B8));
+    background-image: -webkit-linear-gradient(left,#10C888 0,#5CE0B8 100%);
+    background-image: -moz-linear-gradient(left,#10C888 0,#5CE0B8 100%);
+    background-image: -o-linear-gradient(left,#10C888 0,#5CE0B8 100%);
+    background-image: linear-gradient(to right,#10C888 0,#5CE0B8 100%);
+    background-repeat: repeat-x;
+}
+.bg-gradient.bg-darken-2 {
+    background-color: #22c2dc !important;
+}
+.bg-yellow {
+    background-color: #eac50a !important;
+}
+.bg-gradient-x-yellow {
+    background-image: linear-gradient(to right,#eac50a 0,#eac50a 100%);
+    background-image: -webkit-linear-gradient(left,#eac50a 0,#eac50a 100%);
+    background-image: -moz-linear-gradient(left,#eac50a 0,#eac50a 100%);
+    background-image: -o-linear-gradient(left,#eac50a  0,#eac50a 100%);
+    background-image: linear-gradient(to right,#eac50a 0,#eac50a 100%);
+    background-repeat: repeat-x;
+}
+.bg-gradient-x-info {
+    background-image: -webkit-gradient(linear,left top,right top,from(#22C2DC),to(#6CDDEB));
+    background-image: -webkit-linear-gradient(left,#22C2DC 0,#6CDDEB 100%);
+    background-image: -moz-linear-gradient(left,#22C2DC 0,#6CDDEB 100%);
+    background-image: -o-linear-gradient(left,#22C2DC 0,#6CDDEB 100%);
+    background-image: linear-gradient(to right,#22C2DC 0,#6CDDEB 100%);
+    background-repeat: repeat-x;
+}
+.userimg
+{
+    float: left;
+    width: 100%
+}
+.userimg img
+{
+    height: 35px;
+    width:35px;
+    padding-bottom: 4px;
+}
+.memberdetails
+{
+    
+    float: left;
+    width: 100%;
+    padding:10px 3px 4px 3px;
+    border-bottom:1px solid #f7f7f1;
+    
+}
+.new_memberlist
+{       
+    background: #ffffff;
+    /* box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06); */
+    box-shadow: 2px 2px 3px #d2cdcd;
+    height: 375px;
+    overflow: hidden;
+}
+.userimg h6
+{    
+    color:#333333;
+    font-size: 14px;    
+} 
+.userimg p
+{
+    font-size:9px;
+    color:#333333;
+}
+.userinfo{
+    float: left;
+    width: 100%
+}
+.userinfo h6
+{
+    text-align:center;
+    margin-bottom:0px;
+}
+.user_date
+{
+    font-size:11px;
+    color:#a1a6a9;
+    margin:0px;
+}
+.userinfo p
+{
+    font-size:11px;
+    color:#a1a6a9;
+    text-align: right;
+    margin:0px;
+}
+.heading-small
+{
+    color: #333333;
+    font-size: 12px;
+    font-weight: 800;
+}
+.viewmore
+{   
+    width:100%;
+    font-size:12px;
+    text-align: right;
+    padding-bottom: 5px;
+    padding-right:10px;
+}
+.view-det
+{
+    color:#4CAF50;
+}
+.whiteicon
+{
+    color:#ffffff;
+}
+.memberdetails:hover
+{
+    background: #f0f5ed;
+}
+.eventname
+{
+    font-size:11px !important;
+    font-weight: 800;
+}

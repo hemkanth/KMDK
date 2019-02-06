@@ -1,0 +1,194 @@
+<div class="Division_Section"> 
+    <p *ngIf="confirmbtn==true" class="card card-block card-header successfrm" >Confirmed</p>
+    <p *ngIf="declinebtn==true" class="card card-block card-header declinefrm" >Declined</p>
+      <!-- <pre class="card card-block card-header" ng-init="message = false">{{message}}</pre> -->
+    <div class="side-heading">
+      <h3>அணி நிர்வாகிகள்</h3>
+      <button type="button" class="btn btn-success create-btn" (click)="openCreateModal(createtemplate)">புதிய அணி நிர்வாகி சேர்க்கவும்</button>
+     <!-- -----------check box------------------ -->
+     <!-- <div ng-app="">
+      <form>
+        Check to show a header:
+        <input type="checkbox" ng-model="myVar">
+      </form>
+      <h1 ng-show="myVar">My Header</h1>
+    </div> -->  
+    </div>  
+  
+    <div class="table_section">
+      <table>
+        <thead>
+          <tr>
+            <th>வ.எண்</th>
+            <th>நிர்வாகி பெயர்</th>
+            <th>கிளை </th>                                    
+            <th>நடவடிக்கை</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="nme">நிர்வாகி 1</td>  
+            <td>கிளை 1</td>            
+            <td>
+                <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="nme">நிர்வாகி 2</td>           
+            <td>கிளை 2</td>            
+            <td>
+                <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                  <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                  <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td class="nme">நிர்வாகி 3</td>
+              <td>கிளை 2</td>                         
+              <td>
+                  <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                  <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                  <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td class="nme">நிர்வாகி 4</td>  
+              <td>கிளை 3</td>                   
+              <td>
+                  <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                  <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                  <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                  <!-- <a name="view" href="#" class="btn-blue"><i class="fa fa-eye"></i></a>
+                  <a name="update" href="#" class="btn-orange"><i class="fa fa-edit"></i></a>
+                  <a name="delete" href="#" class="btn-red"><i class="fa fa-trash"></i></a> -->
+                </td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td class="nme">நிர்வாகி 5</td>             
+              <td>கிளை 3</td>              
+              <td>                                 
+                  <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                  <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                  <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                  <!-- Delete Modal  -->
+                  <ng-template #deletetemplate>
+                      <div class="modal-header">
+                          <h4 class="modal-title pull-left modalheading">அணி நிர்வாகி நீக்கு </h4>
+                        </div>
+                      <div class="modal-body text-center del-title">
+                        <p>நீங்கள் உறுதிப்படுத்த விரும்புகிறீர்களா</p>
+                        <button type="button" class="btn btn-success modelbtn" (click)="confirm()" >ஆம்</button>
+                        <button type="button" class="btn btn-danger modelbtn" (click)="decline()" >இல்லை</button>
+                      </div>
+                    </ng-template>
+                    <!-- Delete Modal  -->
+                  <ng-template #edittemplate>
+                    <div class="modal-header">
+                      <h4 class="modal-title pull-left modalheading">அணி நிர்வாகி மேம்படுத்தல்</h4>
+                    </div>
+                      <div class="modal-body text-center">
+                          <div class="form-section">
+                            <form [formGroup]="editForm">                                                      
+                              <div class="frm-field">
+                                  <div class="frm-lbl"> நிர்வாகி </div>
+                                  <div class="frm-input">
+                                      <ng-select class="ng-select ng-select-multiple" 
+                                      [items]="Userlist"
+                                      [bindLabel]="'label'"
+                                      [bindValue]="'value'"
+                                      placeholder="நிர்வாகி தேர்வு">
+                                    </ng-select>  
+                                  </div>
+                              </div>                                                         
+                              <div class="frm-field">
+                                  <div class="frm-lbl">கிளை </div>
+                                  <div class="frm-input">
+                                      <ng-select class="ng-select ng-select-multiple" 
+                                      [items]="Branchlist"
+                                      [bindLabel]="'label'"
+                                      [bindValue]="'value'"
+                                      placeholder="கிளை தேர்வு">
+                                    </ng-select>                                   
+                                    </div>    
+                              </div>                             
+                            </form>                         
+                          </div>
+                      </div>
+                      <div class="modal-footer border-btm">
+                        <div class="frm-field">
+                            <button class="btn btn-success update-button">மேம்படுத்தல்</button>
+                        </div>
+                      </div>
+                    </ng-template>
+                    <!-- Create New Division-->
+                    <ng-template #createtemplate>
+                        <div class="modal-header">
+                          <h4 class="modal-title pull-left modalheading">அணி நிர்வாகி சேர்க்க</h4>
+                        </div>
+                          <div class="modal-body text-center">
+                              <div class="form-section">
+                                <form [formGroup]="editForm">                                                      
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">நிர்வாகி </div>
+                                      <div class="frm-input">
+                                          <ng-select class="ng-select ng-select-multiple" 
+                                          [items]="Userlist"
+                                          [bindLabel]="'label'"
+                                          [bindValue]="'value'"
+                                          placeholder="நிர்வாகி தேர்வு">
+                                        </ng-select> 
+                                      </div>
+                                  </div>                                  
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">கிளை </div>
+                                      <div class="frm-input">
+                                          <ng-select class="ng-select ng-select-multiple" 
+                                          [items]="Branchlist"
+                                          [bindLabel]="'label'"
+                                          [bindValue]="'value'"
+                                          placeholder="கிளை தேர்வு">
+                                        </ng-select>                                        
+                                        </div>    
+                                  </div>                             
+                                </form>                         
+                              </div>
+                          </div>
+                          <div class="modal-footer border-btm">
+                            <div class="frm-field">
+                                <button class="btn btn-success submit-button">சமர்ப்பிக்க</button>
+                            </div>
+                          </div>
+                        </ng-template>
+                    <!-- View Modal -->
+                  <ng-template #viewtemplate>
+                      <div class="modal-header">
+                        <h4 class="modal-title pull-left modalheading">அணி நிர்வாகி விவரம்</h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="form-section">
+                              <div class="form">                              
+                                <div class="icon">                                                               
+                                    <p>நிர்வாகி : பிரிவு</p>                                     
+                                    <p>கிளை : கிளை</p>
+                                </div>                              
+                              </div>
+                            </div>
+                      </div>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>

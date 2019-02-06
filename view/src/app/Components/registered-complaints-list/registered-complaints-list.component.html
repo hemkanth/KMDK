@@ -1,0 +1,327 @@
+<div class="Registered_Complaints_Section"> 
+    <p *ngIf="confirmbtn==true" class="card card-block card-header successfrm" >Confirmed</p>
+    <p *ngIf="declinebtn==true" class="card card-block card-header declinefrm" >Declined</p>
+      <!-- <pre class="card card-block card-header" ng-init="message = false">{{message}}</pre> -->         
+      <mat-tab-group>
+        <mat-tab label="புகார்கள் பதிவு">          
+          <div class="table_section">
+            <table>
+              <thead>
+                <tr>
+                  <th>வ.எண்</th>
+                  <th>பெயர்</th>
+                  <th>தொடர்பு எண்</th>
+                  <th>தேதி</th>
+                  <th>நடவடிக்கை</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td class="nme">சிவா</td>
+                  <td>4357846546</td>
+                  <td>21.01.2019</td>
+                  <td>
+                      <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td class="nme">ராஜா</td>
+                  <td>4357846546</td>
+                  <td>18.01.2019</td>
+                  <td>
+                      <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td class="nme">ரமேஷ்</td>
+                    <td>4357846546</td>
+                    <td>02.01.2019</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td class="nme">சரவணன்</td>
+                    <td>4357846546</td>
+                    <td>02.01.2019</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                        <!-- <a name="view" href="#" class="btn-blue"><i class="fa fa-eye"></i></a>
+                        <a name="update" href="#" class="btn-orange"><i class="fa fa-edit"></i></a>
+                        <a name="delete" href="#" class="btn-red"><i class="fa fa-trash"></i></a> -->
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td class="nme">உமா மகேஸ்வரி</td>
+                    <td>4357846546</td>
+                    <td>02.01.2019</td>
+                    <td>                                 
+                        <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                        <!-- Delete Modal  -->
+                        <ng-template #deletetemplate>
+                            <div class="modal-header">
+                                <h4>புகார் நீக்கு </h4>
+                              </div>
+                            <div class="modal-body text-center del-title">
+                              <p>நீங்கள் உறுதிப்படுத்த விரும்புகிறீர்களா</p>
+                              <button type="button" class="btn btn-success modelbtn" (click)="confirm()" >ஆம்</button>
+                              <button type="button" class="btn btn-danger modelbtn" (click)="decline()" >இல்லை</button>
+                            </div>
+                          </ng-template>
+                          <!-- Delete Modal  -->
+                        <ng-template #edittemplate>
+                          <div class="modal-header">
+                            <h4 class="modal-title pull-left modalheading">புகார்கள் மேம்படுத்தல்</h4>
+                          </div>
+                            <div class="modal-body text-center">
+                                <div class="form-section">
+                                  <form [formGroup]="editForm">
+                                    <div class="frm-field">
+                                      <div class="frm-lbl">பெயர் </div>
+                                      <div class="frm-input"><input formControlName="Name" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                        <div class="frm-lbl">தொடர்பு எண் </div>
+                                        <div class="frm-input"><input formControlName="ContactNumber" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                        <div class="frm-lbl">மாவட்டம் </div>
+                                        <div class="frm-input"><input formControlName="District" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                        <div class="frm-lbl">மண்டலம் </div>
+                                        <div class="frm-input"><input formControlName="Zone" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                        <div class="frm-lbl">கிளை </div>
+                                        <div class="frm-input"><input formControlName="Branch" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                      <div class="frm-lbl">பிரச்சினை </div>
+                                      <div class="frm-input"><textarea formControlName="issue"></textarea></div>
+                                  </div>
+                                  <div class="frm-field">
+                                    <div class="frm-lbl">தீர்வு </div>
+                                    <div class="frm-input"><textarea formControlName="solution"></textarea></div>
+                                </div>
+                                <div class="frm-field">
+                                  <div class="frm-lbl">கருத்துக்கள் </div>
+                                  <div class="frm-input"><textarea formControlName="solution"></textarea></div>
+                              </div>
+                                  </form>                         
+                                </div>
+                            </div>
+                            <div class="modal-footer border-btm">
+                              <div class="frm-field">
+                                  <button class="btn btn-success update-button">Update</button>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- View Modal -->
+                        <ng-template #viewtemplate>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left modalheading">புகார்கள் விவரம்</h4>
+                              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-section">
+                                    <div class="form">                              
+                                      <div class="icon">                                                               
+                                          <p>பெயர் : சிவா</p>
+                                          <p>தொடர்பு எண் : 7894562156</p>
+                                          <p>மாவட்டம் : கோயம்புத்தூர்</p>
+                                          <p>மண்டலம் : தொண்டாமுத்தூர்</p>
+                                          <p>கிளை : கணபதி</p>
+                                          <p>பிரச்சினை : </p>
+                                          <p>தீர்வு : </p>
+                                          <p>கருத்துக்கள் : </p>
+                                      </div>                              
+                                    </div>
+                                  </div>
+                            </div>
+                          </ng-template>
+                      </td>
+                  </tr>
+              </tbody>
+            </table>            
+          </div>
+        </mat-tab>
+        <mat-tab label="கூறப்பட்ட புகார்கள் பதிவு">
+          <div class="table_section">
+            <table>
+              <thead>
+                <tr>
+                  <th>வ.எண்</th>
+                  <th>பெயர்</th>
+                  <th>தொடர்பு எண்</th>
+                  <th>தேதி</th>
+                  <th>நடவடிக்கை</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td class="nme">சிவா</td>
+                  <td>4357846546</td>
+                  <td>21.01.2019</td>
+                  <td>
+                      <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                      <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td class="nme">ராஜா</td>
+                  <td>4357846546</td>
+                  <td>18.01.2019</td>
+                  <td>
+                      <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td class="nme">ரமேஷ்</td>
+                    <td>4357846546</td>
+                    <td>02.01.2019</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td class="nme">சரவணன்</td>
+                    <td>4357846546</td>
+                    <td>02.01.2019</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                        <!-- <a name="view" href="#" class="btn-blue"><i class="fa fa-eye"></i></a>
+                        <a name="update" href="#" class="btn-orange"><i class="fa fa-edit"></i></a>
+                        <a name="delete" href="#" class="btn-red"><i class="fa fa-trash"></i></a> -->
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td class="nme">உமா மகேஸ்வரி</td>
+                    <td>4357846546</td>
+                    <td>02.01.2019</td>
+                    <td>                                 
+                        <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger" (click)="openDeleteModal(deletetemplate)"><i class="fa fa-trash"></i></button>                
+                        <!-- Delete Modal  -->
+                        <ng-template #deletetemplate>
+                            <div class="modal-header">
+                                <h4>புகார் நீக்கு </h4>
+                              </div>
+                            <div class="modal-body text-center del-title">
+                              <p>நீங்கள் உறுதிப்படுத்த விரும்புகிறீர்களா</p>
+                              <button type="button" class="btn btn-success modelbtn" (click)="confirm()" >ஆம்</button>
+                              <button type="button" class="btn btn-danger modelbtn" (click)="decline()" >இல்லை</button>
+                            </div>
+                          </ng-template>
+                          <!-- Delete Modal  -->
+                        <ng-template #edittemplate>
+                          <div class="modal-header">
+                            <h4 class="modal-title pull-left modalheading">புகார்கள் மேம்படுத்தல்</h4>
+                          </div>
+                            <div class="modal-body text-center">
+                                <div class="form-section">
+                                  <form [formGroup]="editForm">
+                                    <div class="frm-field">
+                                      <div class="frm-lbl">பெயர் </div>
+                                      <div class="frm-input"><input formControlName="Name" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                        <div class="frm-lbl">தொடர்பு எண் </div>
+                                        <div class="frm-input"><input formControlName="ContactNumber" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                        <div class="frm-lbl">மாவட்டம் </div>
+                                        <div class="frm-input"><input formControlName="District" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                        <div class="frm-lbl">மண்டலம் </div>
+                                        <div class="frm-input"><input formControlName="Zone" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                        <div class="frm-lbl">கிளை </div>
+                                        <div class="frm-input"><input formControlName="Branch" /></div>
+                                    </div>
+                                    <div class="frm-field">
+                                      <div class="frm-lbl">பிரச்சினை </div>
+                                      <div class="frm-input"><textarea formControlName="issue"></textarea></div>
+                                  </div>
+                                  <div class="frm-field">
+                                    <div class="frm-lbl">தீர்வு </div>
+                                    <div class="frm-input"><textarea formControlName="solution"></textarea></div>
+                                </div>
+                                <div class="frm-field">
+                                  <div class="frm-lbl">கருத்துக்கள் </div>
+                                  <div class="frm-input"><textarea formControlName="solution"></textarea></div>
+                              </div>
+                                  </form>                         
+                                </div>
+                            </div>
+                            <div class="modal-footer border-btm">
+                              <div class="frm-field">
+                                  <button class="btn btn-success update-button">Update</button>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- View Modal -->
+                        <ng-template #viewtemplate>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left modalheading">புகார்கள் விவரம்</h4>
+                              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-section">
+                                    <div class="form">                              
+                                      <div class="icon">                                                               
+                                          <p>பெயர் : சிவா</p>
+                                          <p>தொடர்பு எண் : 7894562156</p>
+                                          <p>மாவட்டம் : கோயம்புத்தூர்</p>
+                                          <p>மண்டலம் : தொண்டாமுத்தூர்</p>
+                                          <p>கிளை : கணபதி</p>
+                                          <p>பிரச்சினை : </p>
+                                          <p>தீர்வு : </p>
+                                          <p>கருத்துக்கள் : </p>
+                                      </div>                              
+                                    </div>
+                                  </div>
+                            </div>
+                          </ng-template>
+                      </td>
+                  </tr>
+              </tbody>
+            </table> 
+          </div>        
+        </mat-tab>             
+      </mat-tab-group>              
+  </div>

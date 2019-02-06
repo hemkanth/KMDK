@@ -1,0 +1,120 @@
+<div class="Division_Section"> 
+    <p *ngIf="confirmbtn==true" class="card card-block card-header successfrm" >Confirmed</p>
+    <p *ngIf="declinebtn==true" class="card card-block card-header declinefrm" >Declined</p>
+      <!-- <pre class="card card-block card-header" ng-init="message = false">{{message}}</pre> -->
+    <div class="side-heading">
+      <h3>பதிவிறக்கம்</h3>
+      <button type="button" class="btn btn-success create-btn" (click)="openCreateModal(createtemplate)">புதிய பதிவிறக்கம் சேர்க்கவும்</button>
+     <!-- -----------check box------------------ -->
+     <!-- <div ng-app="">
+      <form>
+        Check to show a header:
+        <input type="checkbox" ng-model="myVar">
+      </form>
+      <h1 ng-show="myVar">My Header</h1>
+    </div> -->  
+    </div>  
+  
+    <div class="table_section">
+      <table>
+        <thead>
+          <tr>
+            <th>வ.எண்</th>
+            <th>பெயர் </th>
+            <th>தேதி</th>
+            <th>நடவடிக்கை</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="nme">பெயர் பதிவேற்றம்</td>  
+            <td>05/02/2019</td>            
+            <td>
+                <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>                
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="nme">பெயர்</td>  
+            <td class="nme">12/01/2019</td>                                  
+            <td>
+                <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>                 
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>கிளை 2</td> 
+              <td class="nme">15/12/2018</td>                                      
+              <td>
+                  <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>                 
+                </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>கிளை 3</td> 
+              <td class="nme">21/11/2018</td>                                  
+              <td>
+                  <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>                 
+                </td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>கிளை 3</td>  
+              <td class="nme">20/11/2018</td>                                       
+              <td>                                 
+                  <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>                                
+                    <!-- Create New Division-->
+                    <ng-template #createtemplate>
+                        <div class="modal-header">
+                          <h4 class="modal-title pull-left modalheading">பதிவிறக்கம் சேர்க்க</h4>
+                        </div>
+                          <div class="modal-body text-center">
+                              <div class="form-section">
+                                <form [formGroup]="editForm">                                                                                                                    
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">பெயர்  </div>
+                                      <div class="frm-input">
+                                        <input type="text" formControlName="Name" />
+                                        </div>    
+                                  </div>                                    
+                                  <div class="frm-field">
+                                      <div class="frm-lbl">கோப்பு</div>
+                                      <div class="frm-input"><input type="file" formControlName="CertificateFile" /></div>
+                                    </div>                         
+                                </form>                         
+                              </div>
+                          </div>
+                          <div class="modal-footer border-btm">
+                            <div class="frm-field">
+                                <button class="btn btn-success submit-button">சமர்ப்பிக்க</button>
+                            </div>
+                          </div>
+                        </ng-template>
+                    <!-- View Modal -->
+                  <ng-template #viewtemplate>
+                      <div class="modal-header">
+                        <h4 class="modal-title pull-left modalheading">பதிவிறக்க விவரம்</h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="form-section">
+                              <div class="form">                              
+                                <div class="icon">       
+                                    <p>பெயர் : </p>                                                                                           
+                                    <p>கோப்பு : </p>
+                                    <p>பதிவிறக்கம் : </p>                                                                         
+                                </div>                              
+                              </div>
+                            </div>
+                      </div>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>

@@ -1,0 +1,152 @@
+
+.Members_Section {
+    width: 78%;
+    margin-left: 20%; 
+}
+.table_section > table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 2px 2px 3px #d2cdcd;
+ }
+.table_section th {
+    background-color: #4CAF50;
+    color: white;
+    font-size:13px;
+}
+.table_section > table tr:nth-child(odd) {
+    background-color: #ececec;
+  }
+.nme
+{
+    font-size: 13px !important;
+}
+.table_section th, td 
+{
+    text-align: left;
+    padding: 6px 8px;
+}
+.table_section td{
+    font-size: 14px;
+}
+.side-heading
+{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.side-heading h3{
+    color: #4CAF50;
+    font-size: 16px;
+    font-weight: 800;
+}
+.btn-red
+{
+    color:#f00;
+    border:none;
+    font-size: 20px;
+}
+.btn-orange
+{
+    color:#ff8300;
+    border:none;
+    font-size: 20px;
+    padding-right: 25px;
+}
+.btn-blue
+{
+    color:#1994ef;
+    border:none;
+    font-size: 20px;
+    padding-right: 25px;
+}
+.successfrm
+{
+    margin-top: 20px;
+    background: #4CAF50;
+    color:#ffffff;
+}
+.declinefrm
+{
+    margin-top: 20px;
+    background: #f00;
+    color:#ffffff;
+}
+.modelbtn
+{
+    width: 80px;
+    padding:3px;
+    font-size: 13px;
+}
+.view-detail p
+{
+    font-size: 12px;
+}
+.view-detail img
+{
+    height: 100px;
+    width:100px;
+}
+.member-pic
+{
+    width: 25%;
+    float: left;
+    margin-right: 30px;
+}
+.member-detail
+{
+    width:65%;
+    float: left;
+}
+.modalheading
+{
+    font-size: 16px;
+    color:#3d6b45;
+    font-weight: 800;
+}
+.frm-field
+{
+    width:100%;
+    float: left;
+    margin-bottom: 10px;
+}
+.frm-field input
+{
+    padding:5px;
+    width:80%;
+    font-size: 12px;
+    text-align: left;
+    border:1px solid #d2cdcd;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+}
+.frm-field span{
+    width:50px;
+}
+.frm-lbl
+{
+    width: 28%;
+    float: left;
+    font-size: 12px;
+    text-align: left;
+}
+.frm-input
+{
+    width: 72%;
+    float: left;    
+}
+.update-button
+{
+    width:80px;
+    float: right;
+    padding: 3px;
+}
+.border-btm
+{
+    border-bottom:1px solid #d2cdcd;
+}
+.del-title
+{
+    font-size: 10px;
+}
