@@ -11,18 +11,35 @@
     color: #4CAF50;
     font-size: 16px;
     font-weight: 800;
-    padding-bottom: 20px;
+    padding-bottom: 20px;    
+    width: 70%;
+    float: left;
+}
+.submit-button
+{
+    width:120px;
+    font-size: 13px;
+    float: right;
+    padding: 3px;
+}
+.create-btn
+{
+    width: 290px;
+    float: right;
+    margin-bottom: 20px;
+    font-size: 13px;
+    padding: 4px;
 }
 .gallery-list
 {
-   margin-top:-70px;
+   width:100%;
 }
 .ngx-gallery-image
 {
     width: 100px;
     height: 100px;
 }
-.gallery_image img{
+.gallery_image img{ 
     height: 180px;
     width:200px;
 }
@@ -135,4 +152,44 @@ a.lightbox-close:after {
     color: #339e2c;
     font-size: 22px;
     text-align: center;
+}
+.modalheading
+{
+    font-size: 16px;
+    color:#3d6b45;
+    font-weight: 800;
+}
+.frm-field
+{
+    width:100%;
+    float: left;
+    margin-bottom: 10px;
+}
+.frm-field input
+{
+    padding:5px;
+    width:80%;
+    font-size: 12px;
+    text-align: left;
+    border:1px solid #d2cdcd;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+}
+.frm-field span{
+    width:50px;
+}
+.frm-lbl
+{
+    width: 28%;
+    float: left;
+    font-size: 12px;
+    text-align: left;
+}
+.frm-input
+{
+    width: 72%;
+    float: left;    
 }

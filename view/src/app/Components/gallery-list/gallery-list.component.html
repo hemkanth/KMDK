@@ -2,8 +2,11 @@
     <ngx-gallery [options]="galleryOptions" [images]="galleryImages" style="width:100px;height:100px;"></ngx-gallery>
 </div> -->
 <div class="Gallery-Section">
+        <p *ngIf="confirmbtn==true" class="card card-block card-header successfrm" >Confirmed</p>
+        <p *ngIf="declinebtn==true" class="card card-block card-header declinefrm" >Declined</p>
         <div class="side-heading">
             <h3>புகைப்பட தொகுப்பு</h3>
+            <button type="button" class="btn btn-success create-btn" (click)="openCreateModal(createtemplate)">புதிய புகைப்படத்தைச் சேர்க்கவும்</button>
         </div>       
         <div class="row gallery-list">
             <div class="gallery_image col-md-3">
@@ -89,18 +92,84 @@
                     </div>            
                 </div>            
             </div>
-        <!-- <div class="row gallery-list">
-                <div class="gallery_image col-md-3">
-                <img mat-card-image class="img" src="../../../assets/images/1.jpg">
+     <!-- Delete Modal  -->
+     <ng-template #deletetemplate>
+            <div class="modal-header">
+                <h4>புகைப்படம் நீக்கு </h4>
+              </div>
+            <div class="modal-body text-center del-title">
+              <p>நீங்கள் உறுதிப்படுத்த விரும்புகிறீர்களா</p>
+              <button type="button" class="btn btn-success modelbtn" (click)="confirm()" >ஆம்</button>
+              <button type="button" class="btn btn-danger modelbtn" (click)="decline()" >இல்லை</button>
+            </div>
+          </ng-template>
+          <!-- Delete Modal  -->
+        <ng-template #edittemplate>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left modalheading">புகைப்படம் மேம்படுத்தல்</h4>
+          </div>
+            <div class="modal-body text-center">
+                <div class="form-section">
+                  <form [formGroup]="editForm">                                                      
+                      <div class="frm-field">
+                          <div class="frm-lbl">புகைப்பட பெயர்</div>
+                          <div class="frm-input"><input formControlName="galleryname" /></div>
+                      </div>                      
+                      <div class="frm-field">
+                          <div class="frm-lbl">படம்</div>
+                          <div class="frm-input"><input type="file" formControlName="galleryimage" /></div>
+                      </div>                               
+                  </form>                         
                 </div>
-                <div class="gallery_image col-md-3">
-                <img mat-card-image class="img" src="../../../assets/images/2.jpg">
+            </div>
+            <div class="modal-footer border-btm">
+              <div class="frm-field">
+                  <button class="btn btn-success update-button">மேம்படுத்தல்</button>
+              </div>
+            </div>
+          </ng-template>
+          <!-- View Modal -->
+        <ng-template #viewtemplate>
+            <div class="modal-header">
+              <h4 class="modal-title pull-left modalheading">புகைப்படம் விவரம்</h4>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-section">
+                    <div class="form">                              
+                      <div class="icon">                                                               
+                          <p>பெயர் : பத்திரிகை சந்திப்பு</p> 
+                          <p>படம் : 	</p>                                                                                                
+                      </div>                              
+                    </div>
+                  </div>
+            </div>
+          </ng-template>
+          <!--  Create New District -->
+          <ng-template #createtemplate>
+            <div class="modal-header">
+              <h4 class="modal-title pull-left modalheading">புகைப்படம் சேர்க்க</h4>
+            </div>
+              <div class="modal-body text-center">
+                  <div class="form-section">
+                    <form [formGroup]="editForm">                                                      
+                            <div class="frm-field">
+                                    <div class="frm-lbl">புகைப்பட பெயர்</div>
+                                    <div class="frm-input"><input formControlName="galleryname" /></div>
+                                </div>                      
+                                <div class="frm-field">
+                                    <div class="frm-lbl">படம்</div>
+                                    <div class="frm-input"><input type="file" formControlName="galleryimage" /></div>
+                                </div>                                                 
+                    </form>                         
+                  </div>
+              </div>
+              <div class="modal-footer border-btm">
+                <div class="frm-field">
+                    <button class="btn btn-success submit-button">சமர்ப்பிக்க</button>
                 </div>
-                <div class="gallery_image col-md-3">
-                <img mat-card-image class="img" src="../../../assets/images/3.jpg">
-                </div>
-                <div class="gallery_image col-md-3">
-                <img mat-card-image class="img" src="../../../assets/images/4.jpg">
-                </div>
-            </div> -->
+              </div>
+            </ng-template>
       </div>

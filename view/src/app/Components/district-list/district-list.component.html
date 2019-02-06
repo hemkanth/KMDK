@@ -88,11 +88,7 @@
                     </div>
                       <div class="modal-body text-center">
                           <div class="form-section">
-                            <form [formGroup]="editForm">                                                      
-                              <div class="frm-field">
-                                  <div class="frm-lbl">மாவட்டம் </div>
-                                  <div class="frm-input"><input formControlName="District" /></div>
-                              </div>                      
+                            <form [formGroup]="editForm">                                                                                                        
                               <div class="frm-field">
                                 <div class="frm-lbl">மாநிலம்</div>
                                 <div class="frm-input">
@@ -105,9 +101,13 @@
                                 </div> 
                               </div>  
                               <div class="frm-field">
-                                <div class="frm-lbl">விளக்கம் </div>
-                                <div class="frm-input"><input formControlName="Decsription" /></div>
-                            </div>          
+                                  <div class="frm-lbl">மாவட்டம் </div>
+                                  <div class="frm-input"><input formControlName="District" /></div>
+                              </div> 
+                              <div class="frm-field">
+                                  <div class="frm-lbl">கருத்துக்கள் </div>
+                                  <div class="frm-input"><textarea formControlName="Decsription"></textarea> </div>
+                              </div>            
                             </form>                         
                           </div>
                       </div>
@@ -128,9 +128,10 @@
                       <div class="modal-body">
                           <div class="form-section">
                               <div class="form">                              
-                                <div class="icon">                                                               
-                                    <p>பெயர் : நாமக்கல்</p>         
+                                <div class="icon">                                                                                                         
                                     <p>மாநிலம் : தமிழ்நாடு</p>                          
+                                    <p>மாவட்டம் : நாமக்கல்</p>   
+                                    <p>கருத்துக்கள் :</p>
                                 </div>                              
                               </div>
                             </div>
@@ -143,11 +144,7 @@
                       </div>
                         <div class="modal-body text-center">
                             <div class="form-section">
-                              <form [formGroup]="editForm">                                                      
-                                <div class="frm-field">
-                                    <div class="frm-lbl">மாவட்டம் </div>
-                                    <div class="frm-input"><input formControlName="District" /></div>
-                                </div>              
+                              <form [formGroup]="editForm">                                                                                                
                                 <div class="frm-field">
                                   <div class="frm-lbl">மாநிலம்</div>
                                   <div class="frm-input">
@@ -158,7 +155,15 @@
                                       placeholder="மாநிலம் தேர்வு">
                                     </ng-select>                                            
                                   </div> 
-                                </div>                                                
+                                </div>       
+                                <div class="frm-field">
+                                    <div class="frm-lbl">மாவட்டம் </div>
+                                    <div class="frm-input"><input formControlName="District" /></div>
+                                </div> 
+                                <div class="frm-field">
+                                    <div class="frm-lbl">கருத்துக்கள் </div>
+                                    <div class="frm-input"><textarea formControlName="Decsription"></textarea> </div>
+                                </div>                                           
                               </form>                         
                             </div>
                         </div>

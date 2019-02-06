@@ -73,7 +73,7 @@
                   <!-- Delete Modal  -->
                   <ng-template #deletetemplate>
                       <div class="modal-header">
-                          <h4>நிர்வாகி பதவி நீக்கு </h4>
+                          <h4 class="modal-title pull-left modalheading">நிர்வாகி பதவி நீக்கு </h4>
                         </div>
                       <div class="modal-body text-center del-title">
                         <p>நீங்கள் உறுதிப்படுத்த விரும்புகிறீர்களா</p>
@@ -92,7 +92,37 @@
                               <div class="frm-field">
                                   <div class="frm-lbl">நிர்வாகி பதவி </div>
                                   <div class="frm-input"><input formControlName="District" /></div>
-                              </div>                             
+                              </div>     
+                              <div class="frm-field">
+                                  <div class="frm-lbl">பிரிவு</div>
+                                  <div class="frm-input">
+                                      <mat-checkbox class="example-margin"></mat-checkbox>                                      
+                                  </div>
+                              </div>    
+                              <div class="frm-field">
+                                  <div class="frm-lbl">உறுப்பினர்</div>
+                                  <div class="frm-input">
+                                      <mat-checkbox class="example-margin">சேர்க்க</mat-checkbox>                                      
+                                      <mat-checkbox class="example-margin">பார்க்க</mat-checkbox>
+                                      <mat-checkbox class="example-margin">திருத்த</mat-checkbox>
+                                      <mat-checkbox class="example-margin">ஒப்புதல்</mat-checkbox>
+                                  </div>
+                              </div>     
+                              <div class="frm-field">
+                                <div class="frm-lbl">உரிமை நிலை</div>
+                                <div class="frm-input">
+                                  <mat-checkbox (change)="checkall($event.checked)">மாநிலம்</mat-checkbox>
+                                  <mat-checkbox formControlName="District" (change)="checkdistrict($event.checked)">மாவட்டம்</mat-checkbox>
+                                  <mat-checkbox formControlName="Zone" (change)="checkzone($event.checked)">ஒன்றியம்</mat-checkbox>
+                                  <mat-checkbox formControlName="Branch" (change)="checkbranch($event.checked)">கிளை</mat-checkbox>
+                                </div>
+                              </div>
+                              <div class="frm-field">
+                                <div class="frm-lbl">கருத்துக்கள்</div>
+                                <div class="frm-input">
+                                  <textarea formControlName="Remarks"></textarea>
+                                </div>
+                              </div>                        
                             </form>                         
                           </div>
                       </div>
