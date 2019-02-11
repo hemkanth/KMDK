@@ -19,11 +19,11 @@ module.exports = (app) => {
    app.post('/API/Settings/DistrictDelete', SettingsController.DistrictSettings_Delete);
 
    // District Settings Routes
-   app.post('/API/Settings/UnionCreate', SettingsController.UnionSettings_Create);
-   app.post('/API/Settings/UnionList', SettingsController.UnionSettings_List);
-   app.post('/API/Settings/UnionView', SettingsController.UnionSettings_View);
-   app.post('/API/Settings/UnionEdit', SettingsController.UnionSettings_Edit);
-   app.post('/API/Settings/UnionDelete', SettingsController.UnionSettings_Delete);
+   app.post('/API/Settings/ZoneCreate', SettingsController.ZoneSettings_Create);
+   app.post('/API/Settings/ZoneList', SettingsController.ZoneSettings_List);
+   app.post('/API/Settings/ZoneView', SettingsController.ZoneSettings_View);
+   app.post('/API/Settings/ZoneEdit', SettingsController.ZoneSettings_Edit);
+   app.post('/API/Settings/ZoneDelete', SettingsController.ZoneSettings_Delete);
 
    // District Settings Routes
    app.post('/API/Settings/BranchCreate', SettingsController.BranchSettings_Create);
@@ -73,17 +73,4 @@ module.exports = (app) => {
    app.post('/API/Settings/OfficialDesignationView', SettingsController.OfficialDesignationSetting_View);
    app.post('/API/Settings/OfficialDesignationEdit', SettingsController.OfficialDesignationSetting_Edit);
    app.post('/API/Settings/OfficialDesignationDelete', SettingsController.OfficialDesignationSetting_Delete);
-
-   // App State Settings Routes
-   app.post('/API/Settings/AppStateList', SettingsController.AppStateSettings_List);
-   app.post('/API/Settings/AppDistrictList', SettingsController.AppDistrictSettings_List);
-   app.post('/API/Settings/AppUnionList', SettingsController.AppUnionSettings_List);
-   app.post('/API/Settings/AppBranchList', SettingsController.AppBranchSettings_List);  
-   app.post('/API/Settings/AppConstitutionList', SettingsController.AppConstitutionSetting_List);
-   app.post('/API/Settings/AppMemberApprovalPeriodList', SettingsController.AppMemberApprovalPeriodSetting_List);
-   app.post('/API/Settings/AppComplaintCategoryList', SettingsController.AppComplaintCategorySetting_List);
-   app.post('/API/Settings/AppAdvertisementTypeList', SettingsController.AppAdvertisementTypeSetting_List);
-   app.post('/API/Settings/AppBoothList', SettingsController.AppBoothSetting_List);
-   app.post('/API/Settings/AppOfficialDesignationList', SettingsController.AppOfficialDesignationSetting_List);
-
 }

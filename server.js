@@ -13,8 +13,10 @@ var LogManagement = require('./server/handling/LogHandling.js');
 var port = process.env.PORT || 3000;
 var app = express();
 
+// process.setMaxListeners(0);
+
 // DB Connection
-mongoose.connect('mongodb://hemkanth:hemkanth_s123@ds125381.mlab.com:25381/kdmk', { useNewUrlParser: true });
+mongoose.connect('mongodb://hemkanth:hemkanth_s123@ds125381.mlab.com:25381/kdmk', { useNewUrlParser: true, useCreateIndex: true, });
 mongoose.connection.on('error', (err) => {   // Error in DB Connection
    console.log('DB Connection Error', err);
 });
@@ -26,6 +28,13 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// *********************** import Web routes file ***************************
+require('./server/web/routes/Settings.routes.js')(app); // Settings Routes
+require('./server/web/routes/Members.routes.js')(app); // Members Routes
+
+// *********************** import App routes file ***************************
+require('./server/app/routes/Settings.routes.js')(app); // Settings Routes
+require('./server/app/routes/Members.routes.js')(app); // Members Routes
 
 app.use(express.static(__dirname + '/view/dist/view/'));
 

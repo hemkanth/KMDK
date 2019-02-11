@@ -6,7 +6,6 @@ var SettingsModel = require('../models/Settings.model.js');
 // Create State in State Settings
 exports.StateSettings_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-
    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
       res.status(400).send({Status: false, Message: 'User details can\'t be empty' });
    } else if(!ReceivingData.StateName || ReceivingData.StateName === '' || ReceivingData.StateName === null) {
@@ -39,24 +38,7 @@ exports.StateSettings_List = (req, res) => {
          if(err) {
             res.status(417).send({Status: false, Message: 'Error in finding states'});
          } else {
-            res.status(417).send({Status: true, Response: result});
-         }
-      });
-   }
-}
-
-// App List State of State Settings
-exports.AppStateSettings_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else {
-      SettingsModel.StateSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt : -1}})
-      .exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in finding states'});
-         } else {
-            res.status(417).send({Status: true, Response: result});
+            res.status(200).send({Status: true, Response: result});
          }
       });
    }
@@ -162,24 +144,8 @@ exports.DistrictSettings_List = (req, res) => {
       res.status(400).send({Status: false, Message: 'User Detail can\'t be empty'});
    } else {
       SettingsModel.DistrictSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in finding states'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   } 
-}
-
-// App List District from District Setting
-exports.AppDistrictSettings_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User Detail can\'t be empty'});
-   } else {
-      SettingsModel.DistrictSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      exec((err, result) => {
+      .populate({ path: 'State', select: ['StateName'] })
+      .exec((err, result) => {
          if(err) {
             res.status(417).send({Status: false, Message: 'Error in finding states'});
          } else {
@@ -251,10 +217,10 @@ exports.DistrictSettings_Delete = (req, res) => {
    }
 }
 
-// ***************************************** Union Settings **************************************
+// ***************************************** Zone Settings **************************************
 
-// Create Union in Union Setting
-exports.UnionSettings_Create = (req, res) => {
+// Create Zone in Zone Setting
+exports.ZoneSettings_Create = (req, res) => {
    var ReceivingData = req.body.Info;
    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
       res.status(400).send({Status: false, Message: 'User Detail can\'t be empty'});
@@ -262,38 +228,38 @@ exports.UnionSettings_Create = (req, res) => {
       res.status(400).send({Status: false, Message: 'State Detail can\'t be empty'});
    } else if(!ReceivingData.District_Id || ReceivingData.District_Id === '' || ReceivingData.District_Id === null) {
       res.status(400).send({Status: false, Message: 'District Detail can\'t be empty'});
-   } else if(!ReceivingData.UnionName || ReceivingData.UnionName === '' || ReceivingData.UnionName === null) {
-      res.status(400).send({Status: false, Message: 'Union Detail can\'t be empty'});
+   } else if(!ReceivingData.ZoneName || ReceivingData.ZoneName === '' || ReceivingData.ZoneName === null) {
+      res.status(400).send({Status: false, Message: 'Zone Detail can\'t be empty'});
    } else {
-      var Create_UnionSettings = new SettingsModel.UnionSettingSchema({
+      var Create_ZoneSettings = new SettingsModel.ZoneSettingSchema({
          State: mongoose.Types.ObjectId(ReceivingData.State_Id),
          District: mongoose.Types.ObjectId(ReceivingData.District_Id),
-         UnionName: ReceivingData.UnionName,
+         ZoneName: ReceivingData.ZoneName,
          Message: ReceivingData.Message,
          CreatedBy: ReceivingData.User_Id,
          UpdatedBy: ReceivingData.User_Id,
          IfDeleted: false
       });
-      Create_UnionSettings.save((err, result) => {
+      Create_ZoneSettings.save((err, result) => {
          if(err) {
-            res.status(417).send({Status: false, Message: 'Error in saving union'});
+            res.status(417).send({Status: false, Message: 'Error in saving Zone'});
          } else {
-            res.status(200).send({Status: true, Message: 'Successfully union create'});
+            res.status(200).send({Status: true, Message: 'Successfully Zone create'});
          }
       });
    }
 }
 
-// List Union from Union Setting
-exports.UnionSettings_List = (req, res) => {
+// List Zone from Zone Setting
+exports.ZoneSettings_List = (req, res) => {
    var ReceivingData = req.body.Info;
    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
       res.status(400).send({Status: false, Message: 'User Detail can\'t be empty'});
    } else {
-      SettingsModel.UnionSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      exec((err, result) => {
+      SettingsModel.ZoneSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
+      .exec((err, result) => {
          if(err) {
-            res.status(417).send({Status: false, Message: 'Error in finding union'});
+            res.status(417).send({Status: false, Message: 'Error in finding Zone'});
          } else {
             res.status(200).send({Status: true, Response: result});
          }
@@ -301,31 +267,14 @@ exports.UnionSettings_List = (req, res) => {
    } 
 }
 
-// App List Union from Union Setting
-exports.AppUnionSettings_List = (req, res) => {
+// View Zone from Zone Settings
+exports.ZoneSettings_View = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User Detail can\'t be empty'});
+   if(!ReceivingData.ZoneSetting_Id || ReceivingData.ZoneSetting_Id === '' || ReceivingData.ZoneSetting_Id === null) {
+      res.status(400).send({Status: false, Message: 'Zone Details can\'t be empty' });
    } else {
-      SettingsModel.UnionSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in finding union'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   } 
-}
-
-// View Union from Union Settings
-exports.UnionSettings_View = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.UnionSetting_Id || ReceivingData.UnionSetting_Id === '' || ReceivingData.UnionSetting_Id === null) {
-      res.status(400).send({Status: false, Message: 'Union Details can\'t be empty' });
-   } else {
-      SettingsModel.UnionSettingSchema
-      .findOne({_id: mongoose.Types.ObjectId(ReceivingData.UnionSetting_Id), IfDeleted: false}, {}, {})
+      SettingsModel.ZoneSettingSchema
+      .findOne({_id: mongoose.Types.ObjectId(ReceivingData.ZoneSetting_Id), IfDeleted: false}, {}, {})
       .exec((err, result) => {
          if(err) {
             res.status(417).send({Status: false, Message: 'Error in view district'});
@@ -336,45 +285,45 @@ exports.UnionSettings_View = (req, res) => {
    }
 }
 
-// Edit Union from Union Settings
-exports.UnionSettings_Edit = (req, res) => {
+// Edit Zone from Zone Settings
+exports.ZoneSettings_Edit = (req, res) => {
    var ReceivingData = req.body.Info;
    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
       res.status(400).send({Status: false, Message: 'User Detail can\'t be empty'});
-   } else if(!ReceivingData.UnionSetting_Id || ReceivingData.UnionSetting_Id === '' || ReceivingData.UnionSetting_Id === null) {
-      res.status(400).send({Status: false, Message: 'Union Details can\'t be empty' });
+   } else if(!ReceivingData.ZoneSetting_Id || ReceivingData.ZoneSetting_Id === '' || ReceivingData.ZoneSetting_Id === null) {
+      res.status(400).send({Status: false, Message: 'Zone Details can\'t be empty' });
    } else if(!ReceivingData.State_Id || ReceivingData.State_Id === '' || ReceivingData.State_Id === null) {
       res.status(400).send({Status: false, Message: 'State Details can\'t be empty' });
-   } else if(!ReceivingData.District_Id || ReceivingData.UnionName === '' || ReceivingData.UnionName === null) {
+   } else if(!ReceivingData.District_Id || ReceivingData.ZoneName === '' || ReceivingData.ZoneName === null) {
       res.status(400).send({Status: false, Message: 'District Details can\'t be empty' });
-   } else if(!ReceivingData.UnionName || ReceivingData.UnionName === '' || ReceivingData.UnionName === null) {
-      res.status(400).send({Status: false, Message: 'Union Details can\'t be empty' });
+   } else if(!ReceivingData.ZoneName || ReceivingData.ZoneName === '' || ReceivingData.ZoneName === null) {
+      res.status(400).send({Status: false, Message: 'Zone Details can\'t be empty' });
    } else {
-      SettingsModel.UnionSettingSchema
-      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.DistrictSetting_Id), IfDeleted: false}, {$set: {State: mongoose.Types.ObjectId(ReceivingData.State_Id), District: mongoose.Types.ObjectId(ReceivingData.District_Id), UnionName: ReceivingData.UnionName, Message: ReceivingData.Message, UpdatedBy: ReceivingData.User_Id}})
+      SettingsModel.ZoneSettingSchema
+      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.DistrictSetting_Id), IfDeleted: false}, {$set: {State: mongoose.Types.ObjectId(ReceivingData.State_Id), District: mongoose.Types.ObjectId(ReceivingData.District_Id), ZoneName: ReceivingData.ZoneName, Message: ReceivingData.Message, UpdatedBy: ReceivingData.User_Id}})
       .exec((err, result) => {
          if(err) {
-            res.status(417).send({Status: false, Message: 'Error in updating union'});
+            res.status(417).send({Status: false, Message: 'Error in updating Zone'});
          } else {
-            res.status(200).send({Status: true, Message: 'Successfully in union updated'});
+            res.status(200).send({Status: true, Message: 'Successfully in Zone updated'});
          }
       });
    }
 }
 
-// Delete union from Union Settings
-exports.UnionSettings_Delete = (req, res) => {
+// Delete Zone from Zone Settings
+exports.ZoneSettings_Delete = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.UnionSetting_Id || ReceivingData.UnionSetting_Id === '' || ReceivingData.UnionSetting_Id === null) {
-      res.status(400).send({Status: false, Message: 'Union Details can\'t be empty' });
+   if(!ReceivingData.ZoneSetting_Id || ReceivingData.ZoneSetting_Id === '' || ReceivingData.ZoneSetting_Id === null) {
+      res.status(400).send({Status: false, Message: 'Zone Details can\'t be empty' });
    } else {
-      SettingsModel.UnionSettingSchema
-      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.UnionSetting_Id), IfDeleted: false}, {$set: {IfDeleted: true, UpdatedBy: ReceivingData.User_Id}})
+      SettingsModel.ZoneSettingSchema
+      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.ZoneSetting_Id), IfDeleted: false}, {$set: {IfDeleted: true, UpdatedBy: ReceivingData.User_Id}})
       .exec((err, result) => {
          if(err) {
             res.status(417).send({Status: false, Message: 'Error in deleting district'});
          } else {
-            res.status(200).send({Status: true, Message: 'Successfully in union deleted'});
+            res.status(200).send({Status: true, Message: 'Successfully in Zone deleted'});
          }
       });
    }
@@ -390,15 +339,15 @@ exports.BranchSettings_Create = (req, res) => {
       res.status(400).send({Status: false, Message: 'State details can\'t bew empty'});
    } else if(!ReceivingData.District_Id || ReceivingData.District_Id === '', ReceivingData.District_Id === null) {
       res.status(400).send({Status: false, Message: 'District details can\'t bew empty'});
-   } else if(!ReceivingData.Union_Id || ReceivingData.Union_Id === '', ReceivingData.Union_Id === null) {
-      res.status(400).send({Status: false, Message: 'Union details can\'t bew empty'});
+   } else if(!ReceivingData.Zone_Id || ReceivingData.Zone_Id === '', ReceivingData.Zone_Id === null) {
+      res.status(400).send({Status: false, Message: 'Zone details can\'t bew empty'});
    } else if(!ReceivingData.BranchName || ReceivingData.BranchName === '', ReceivingData.BranchName === null) {
       res.status(400).send({Status: false, Message: 'Branch details can\'t bew empty'});
    } else {
       var Create_BranchSetting = new SettingsModel.BranchSettingSchema({
          State: mongoose.Types.ObjectId(ReceivingData.State_Id),
          District: mongoose.Types.ObjectId(ReceivingData.District_Id),
-         Union: mongoose.Types.ObjectId(ReceivingData.Union_Id),
+         Zone: mongoose.Types.ObjectId(ReceivingData.Zone_Id),
          BranchName: ReceivingData.BranchName,
          CreatedBy: ReceivingData.User_Id,
          UpdatedBy: ReceivingData.User_Id,
@@ -406,6 +355,7 @@ exports.BranchSettings_Create = (req, res) => {
       });
       Create_BranchSetting.save((err, result) => {
          if(err) {
+            console.log(err);
             res.status(417).send({Status: false, Message: 'Error in creating branch'});
          } else {
             res.status(200).send({Status: true, Message: 'Successfully in branch created'});
@@ -416,23 +366,6 @@ exports.BranchSettings_Create = (req, res) => {
 
 // Branch List from Branch Setting
 exports.BranchSettings_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'user details can\'t bew empty'});
-   } else {
-      SettingsModel.BranchSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      .exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in creating branch'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   }
-}
-
-// App Branch List from Branch Setting
-exports.AppBranchSettings_List = (req, res) => {
    var ReceivingData = req.body.Info;
    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
       res.status(400).send({Status: false, Message: 'user details can\'t bew empty'});
@@ -479,13 +412,13 @@ exports.BranchSettings_Edit = (req, res) => {
       res.status(400).send({Status: false, Message: 'State details can\'t bew empty'});
    } else if(!ReceivingData.District_Id || ReceivingData.District_Id === '' || ReceivingData.District_Id === null) {
       res.status(400).send({Status: false, Message: 'District details can\'t bew empty'});
-   } else if(!ReceivingData.Union_Id || ReceivingData.Union_Id === '' || ReceivingData.Union_Id === null) {
-      res.status(400).send({Status: false, Message: 'Union details can\'t bew empty'});
+   } else if(!ReceivingData.Zone_Id || ReceivingData.Zone_Id === '' || ReceivingData.Zone_Id === null) {
+      res.status(400).send({Status: false, Message: 'Zone details can\'t bew empty'});
    } else if(!ReceivingData.BranchName || ReceivingData.BranchName === '' || ReceivingData.BranchName === null) {
       res.status(400).send({Status: false, Message: 'Branch details can\'t bew empty'});
    } else {
       SettingsModel.BranchSettingSchema
-      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.BranchSetting_Id), IfDeleted: false}, {$set: {State: mongoose.Types.ObjectId(ReceivingData.BranchSetting_Id), District: mongoose.Types.ObjectId(ReceivingData.District_Id), Union: mongoose.Types.ObjectId(Union_Id), BranchName: ReceivingData.BranchName, Message: ReceivingData.Message, UpdatedBy: ReceivingData.User_Id}})
+      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.BranchSetting_Id), IfDeleted: false}, {$set: {State: mongoose.Types.ObjectId(ReceivingData.BranchSetting_Id), District: mongoose.Types.ObjectId(ReceivingData.District_Id), Zone: mongoose.Types.ObjectId(Zone_Id), BranchName: ReceivingData.BranchName, Message: ReceivingData.Message, UpdatedBy: ReceivingData.User_Id}})
       .exec((err, result) => {
          if(err) {
             res.status(417).send({Status: false, Message: 'Error in update branch'});
@@ -561,24 +494,6 @@ exports.ConstitutionSetting_List = (req, res) => {
       });
    }
 }
-
-// App Constitution Setting list
-exports.AppConstitutionSetting_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-     res.status(400).send({Status: false, Message: 'user details can\'t bew empty'});
-   } else {
-      SettingsModel.ConstitutionSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      .exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in listing Constitution'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   }
-}
-
 // Constitution Setting View
 exports.ConstitutionSetting_View = (req, res) => {
    var ReceivingData = req.body.Info;
@@ -670,22 +585,6 @@ exports.GroupSetting_Create = (req, res) => {
 
 // Group Setting List
 exports.GroupSetting_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else {
-      SettingsModel.GroupSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      .exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in listing group'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   }
-}
-// App Group Setting List
-exports.AppGroupSetting_List = (req, res) => {
    var ReceivingData = req.body.Info;
    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
       res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
@@ -806,23 +705,6 @@ exports.MemberApprovalPeriodSetting_List = (req, res) => {
    } 
 }
 
-// App Member Approval period List
-exports.AppMemberApprovalPeriodSetting_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else{
-      SettingsModel.MemberApprovalPeriodSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      .exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in listing Approval period'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   } 
-}
-
 // Member Approval period View
 exports.MemberApprovalPeriodSetting_View = (req, res) => {
    var ReceivingData = req.body.Info;
@@ -926,22 +808,6 @@ exports.ComplaintCategorySetting_List = (req, res) => {
    } 
 }
 
-// App Complaint Category List
-exports.AppComplaintCategorySetting_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else{
-      SettingsModel.ComplaintCategorySettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      .exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in listing Complaint Category'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   } 
-}
 // Complaint Category View
 exports.ComplaintCategorySetting_View = (req, res) => {
    var ReceivingData = req.body.Info;
@@ -1031,23 +897,6 @@ exports.AdvertisementTypeSetting_Create = (req, res) => {
 
 // List Advertisement Type Setting
 exports.AdvertisementTypeSetting_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else {
-      SettingsModel.AdvertisementTypeSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      .exec((err, req) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in creating Advertisement'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   }
-}
-
-// App List Advertisement Type Setting
-exports.AppAdvertisementTypeSetting_List = (req, res) => {
    var ReceivingData = req.body.Info;
    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
       res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
@@ -1170,24 +1019,6 @@ exports.BoothSetting_List = (req, res) => {
       });
    }
 }
-
-// App List Booth Setting
-exports.AppBoothSetting_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else {
-      SettingsModel.BoothSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      .exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in creating booth'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   }
-}
-
 // View Booth Setting
 exports.BoothSetting_View = (req, res) => {
    var ReceivingData = req.body.Info;
@@ -1311,23 +1142,6 @@ exports.OfficialDesignationSetting_Create = (req, res) => {
 
 // List official designation Setting
 exports.OfficialDesignationSetting_List = (req, res) => {
-   var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else {
-      SettingsModel.OfficialDesignationSettingSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
-      .exec((err, result) => {
-         if(err) {
-            res.status(417).send({Status: false, Message: 'Error in finding Official Designation'});
-         } else {
-            res.status(200).send({Status: true, Response: result});
-         }
-      });
-   }
-}
-
-// App List official designation Setting
-exports.AppOfficialDesignationSetting_List = (req, res) => {
    var ReceivingData = req.body.Info;
    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
       res.status(400).send({Status: false, Message: 'User details can\'t be empty'});

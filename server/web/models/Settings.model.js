@@ -25,11 +25,11 @@ var DistrictSettingSchema = mongoose.Schema({
 );
 var VarDistrictSettingSchema = mongoose.model('DistrictSetting', DistrictSettingSchema, 'DistrictSetting_List');
 
-// Union Setting Schema
-var UnionSettingSchema = mongoose.Schema({
+// Zone Setting Schema
+var ZoneSettingSchema = mongoose.Schema({
    State: { type: Schema.Types.ObjectId, ref: 'StateSetting', required: true },
    District: { type: Schema.Types.ObjectId, ref: 'DistrictSetting', required: true },
-   UnionName: { type: String, required: true, unique: true },
+   ZoneName: { type: String, required: true, unique: true },
    Message: { type: String },
    CreatedBy: { type: String },
    UpdatedBy: { type: String },
@@ -37,13 +37,13 @@ var UnionSettingSchema = mongoose.Schema({
    },
    {timestamp: true}
 );
-var VarUnionSettingSchema = mongoose.model('UnionSetting', UnionSettingSchema, 'UnionSetting_List');
+var VarZoneSettingSchema = mongoose.model('ZoneSetting', ZoneSettingSchema, 'ZoneSetting_List');
 
 // Branch Setting Schema
 var BranchSettingSchema = mongoose.Schema({
    State: { type: Schema.Types.ObjectId, ref: 'StateSetting', required: true },
    District: { type: Schema.Types.ObjectId, ref: 'DistrictSetting', required: true },
-   Union: { type: Schema.Types.ObjectId, ref: 'UnionSetting', required: true },
+   Zone: { type: Schema.Types.ObjectId, ref: 'ZoneSetting', required: true },
    BranchName: { type: String, required: true },
    Message: { type: String },
    CreatedBy: { type: String },
@@ -150,7 +150,7 @@ var VarOfficialDesignationSettingSchema = mongoose.model('OfficialDesignationSet
 module.exports = {
    StateSettingSchema : VarStateSettingSchema,
    DistrictSettingSchema : VarDistrictSettingSchema,
-   UnionSettingSchema : VarUnionSettingSchema,
+   ZoneSettingSchema : VarZoneSettingSchema,
    BranchSettingSchema :  VarBranchSettingSchema,
    ConstitutionSettingSchema : VarConstitutionSettingSchema,
    GroupSettingSchema : VarGroupSettingSchema,
