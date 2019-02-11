@@ -32,6 +32,9 @@ import { BranchCertificateComponent } from './Components/branch-certificate/bran
 import { MemberApprovedListComponent } from './Components/member-approved-list/member-approved-list.component';
 import { MemberRejectedListComponent } from './Components/member-rejected-list/member-rejected-list.component';
 import { AdvertisementListComponent } from './Components/advertisement-list/advertisement-list.component';
+import { PartyAffiliationComponent } from './Components/party-affiliation/party-affiliation.component';
+import { RelationshipTypeComponent } from './Components/relationship-type/relationship-type.component';
+
 
 const appRoutes: Routes = [
     { path: '',
@@ -144,6 +147,12 @@ const appRoutes: Routes = [
         animation: { value: 'complaint-category', }
         }
     },
+    { path: 'relationship-type',
+    component: RelationshipTypeComponent,
+    data: {
+        animation: { value: 'relationship-type', }
+        }
+    },
     { path: 'events-list',
     component: EventsListComponent,
     data: {
@@ -208,6 +217,12 @@ const appRoutes: Routes = [
         component: BranchCertificateComponent,
         data: {
             animation: { value: 'branch-certificate', }
+        }
+    },
+    { path: 'party-affiliation',
+        component: PartyAffiliationComponent,
+        data: {
+            animation: { value: 'party-affiliation', }
         }
     }
 ];

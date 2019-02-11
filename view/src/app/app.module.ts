@@ -52,6 +52,8 @@ import { DownloadsComponent } from './Components/downloads/downloads.component';
 import { MemberRejectedListComponent } from './Components/member-rejected-list/member-rejected-list.component';
 import { MemberApprovedListComponent } from './Components/member-approved-list/member-approved-list.component';
 import { AdvertisementListComponent } from './Components/advertisement-list/advertisement-list.component';
+import { PartyAffiliationComponent } from './Components/party-affiliation/party-affiliation.component';
+import { RelationshipTypeComponent } from './Components/relationship-type/relationship-type.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +88,9 @@ import { AdvertisementListComponent } from './Components/advertisement-list/adve
     DownloadsComponent,
     MemberRejectedListComponent,
     MemberApprovedListComponent,
-    AdvertisementListComponent
+    AdvertisementListComponent,
+    PartyAffiliationComponent,
+    RelationshipTypeComponent
   ],
   imports: [
     BrowserModule,
