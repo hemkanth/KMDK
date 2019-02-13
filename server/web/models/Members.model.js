@@ -2,6 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var MembersSchema = mongoose.Schema({
+    MemberImage: {type: Object},
+    MemberIdLength: {type: Number},
+    MemberReferenceId: {type: String, required: true},
     Name: {type: String, required: true},
     Education: {type: String, required: true},
     Address: {type: String, required: true},
@@ -11,6 +14,8 @@ var MembersSchema = mongoose.Schema({
     District: { type: Schema.Types.ObjectId, ref: 'DistrictSetting' },
     Zone: { type: Schema.Types.ObjectId, ref: 'ZoneSetting' },
     Branch: { type: Schema.Types.ObjectId, ref: 'BranchSetting' },
+    If_Committee: {type: Boolean},
+    SubCaste: {type: String},
     If_Official: { type: Boolean, required: true},
     State_Authority: {type: Boolean},
     District_Authority: {type: Boolean},
@@ -20,11 +25,13 @@ var MembersSchema = mongoose.Schema({
     Can_View: {type: Boolean},
     Can_Edit: {type: Boolean},
     Can_Approval: {type: Boolean},
+    Volunteer: {type: Boolean},
     CreatedBy: { type: Schema.Types.ObjectId, ref: 'Members' },
-    UpdatedBy: { type: Schema.Types.ObjectId, ref: 'Members'  },
+    UpdatedBy: { type: Schema.Types.ObjectId, ref: 'Members' },
     Member_Status: {type: String },
     Status: { type: String },
     OTP: {type: String},
+    Designation: { type: Schema.Types.ObjectId, ref: 'OfficialDesignationSetting'},
     IfDeleted: { type: Boolean, required: true },
     ActiveStatus: {type: Boolean, required: true},
     CreatedAt: {type: Date, required: true},
