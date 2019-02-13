@@ -6,16 +6,14 @@ var SettingsModel = require('../models/Settings.model.js');
 // Create State in State Settings
 exports.StateSettings_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty' });
-   } else if(!ReceivingData.StateName || ReceivingData.StateName === '' || ReceivingData.StateName === null) {
+   if(!ReceivingData.StateName || ReceivingData.StateName === '' || ReceivingData.StateName === null) {
       res.status(400).send({Status: false, Message: 'State name can\'t be empty' });
    } else {
       var Create_StateSetting = new SettingsModel.StateSettingSchema({
          StateName : ReceivingData.StateName,
-         CreatedBy : ReceivingData.User_Id,
-         UpdatedBy : ReceivingData.User_Id,
-         IfDeleted : false
+         IfDeleted : false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date() 
       });
       Create_StateSetting.save((err, result) => {
          if(err) {
@@ -67,15 +65,13 @@ exports.StateSettings_View = (req, res) => {
 // Edit State in State Setting
 exports.StateSettings_Edit = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty' });
-   } else if(!ReceivingData.StateSetting_Id || ReceivingData.StateSetting_Id === '' || ReceivingData.StateSetting_Id === null) {
+   if(!ReceivingData.StateSetting_Id || ReceivingData.StateSetting_Id === '' || ReceivingData.StateSetting_Id === null) {
       res.status(400).send({Status: false, Message: 'State Details can\'t be empty' });
    } else if(!ReceivingData.StateName || ReceivingData.StateName === '' || ReceivingData.StateName === null) {
       res.status(400).send({Status: false, Message: 'State name can\'t be empty' });
    } else {
       SettingsModel.StateSettingSchema
-      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.StateSetting_Id), IfDeleted: false}, {$set: {StateName: ReceivingData.StateName, UpdatedBy: ReceivingData.User_Id}})
+      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.StateSetting_Id), IfDeleted: false}, {$set: {StateName: ReceivingData.StateName}})
       .exec((err, result) => {
          if(err) {
             res.status(417).send({Status: false, Message: 'Error in updating states'});
@@ -90,13 +86,11 @@ exports.StateSettings_Edit = (req, res) => {
 exports.StateSettings_Delete = (req, res) => {
    var ReceivingData = req.body.Info;
    
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty' });
-   } else if(!ReceivingData.StateSetting_Id || ReceivingData.StateSetting_Id === '' || ReceivingData.StateSetting_Id === null) {
+   if(!ReceivingData.StateSetting_Id || ReceivingData.StateSetting_Id === '' || ReceivingData.StateSetting_Id === null) {
       res.status(400).send({Status: false, Message: 'State Details can\'t be empty' });
    } else {
       SettingsModel.StateSettingSchema
-      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.StateSetting_Id), IfDeleted: false}, {$set: {IfDeleted: true, UpdatedBy: ReceivingData.User_Id}})
+      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.StateSetting_Id), IfDeleted: false}, {$set: {IfDeleted: true}})
       .exec((err, result) => {
          if(err) {
             res.status(417).send({Status: false, Message: 'Error in deleting states'});
@@ -112,9 +106,7 @@ exports.StateSettings_Delete = (req, res) => {
 // Create District in District Setting
 exports.DistrictSettings_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User Detail can\'t be empty'});
-   } else if(!ReceivingData.State_Id || ReceivingData.State_Id === '' || ReceivingData.State_Id === null) {
+   if(!ReceivingData.State_Id || ReceivingData.State_Id === '' || ReceivingData.State_Id === null) {
       res.status(400).send({Status: false, Message: 'State Detail can\'t be empty'});
    } else if(!ReceivingData.DistrictName || ReceivingData.DistrictName === '' || ReceivingData.DistrictName === null) {
       res.status(400).send({Status: false, Message: 'District Detail can\'t be empty'});
@@ -123,9 +115,9 @@ exports.DistrictSettings_Create = (req, res) => {
          State: mongoose.Types.ObjectId(ReceivingData.State_Id),
          DistrictName: ReceivingData.DistrictName,
          Message: ReceivingData.Message,
-         CreatedBy: ReceivingData.User_Id,
-         UpdatedBy: ReceivingData.User_Id,
-         IfDeleted: false
+         IfDeleted: false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date() 
       });
       Create_DistrictSettings.save((err, result) => {
          if(err) {
@@ -222,9 +214,7 @@ exports.DistrictSettings_Delete = (req, res) => {
 // Create Zone in Zone Setting
 exports.ZoneSettings_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User Detail can\'t be empty'});
-   } else if(!ReceivingData.State_Id || ReceivingData.State_Id === '' || ReceivingData.State_Id === null) {
+   if(!ReceivingData.State_Id || ReceivingData.State_Id === '' || ReceivingData.State_Id === null) {
       res.status(400).send({Status: false, Message: 'State Detail can\'t be empty'});
    } else if(!ReceivingData.District_Id || ReceivingData.District_Id === '' || ReceivingData.District_Id === null) {
       res.status(400).send({Status: false, Message: 'District Detail can\'t be empty'});
@@ -236,9 +226,9 @@ exports.ZoneSettings_Create = (req, res) => {
          District: mongoose.Types.ObjectId(ReceivingData.District_Id),
          ZoneName: ReceivingData.ZoneName,
          Message: ReceivingData.Message,
-         CreatedBy: ReceivingData.User_Id,
-         UpdatedBy: ReceivingData.User_Id,
-         IfDeleted: false
+         IfDeleted: false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date() 
       });
       Create_ZoneSettings.save((err, result) => {
          if(err) {
@@ -333,9 +323,7 @@ exports.ZoneSettings_Delete = (req, res) => {
 // Create Branch setting
 exports.BranchSettings_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else if(!ReceivingData.State_Id || ReceivingData.State_Id === '', ReceivingData.State_Id === null) {
+   if(!ReceivingData.State_Id || ReceivingData.State_Id === '', ReceivingData.State_Id === null) {
       res.status(400).send({Status: false, Message: 'State details can\'t bew empty'});
    } else if(!ReceivingData.District_Id || ReceivingData.District_Id === '', ReceivingData.District_Id === null) {
       res.status(400).send({Status: false, Message: 'District details can\'t bew empty'});
@@ -349,9 +337,9 @@ exports.BranchSettings_Create = (req, res) => {
          District: mongoose.Types.ObjectId(ReceivingData.District_Id),
          Zone: mongoose.Types.ObjectId(ReceivingData.Zone_Id),
          BranchName: ReceivingData.BranchName,
-         CreatedBy: ReceivingData.User_Id,
-         UpdatedBy: ReceivingData.User_Id,
-         IfDeleted: false
+         IfDeleted: false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date() 
       });
       Create_BranchSetting.save((err, result) => {
          if(err) {
@@ -453,9 +441,7 @@ exports.BranchSettings_Delete = (req, res) => {
 // Constitution Setting Create
 exports.ConstitutionSetting_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User Detail can\'t be empty'});
-   } else if(!ReceivingData.BranchSetting_Id || ReceivingData.BranchSetting_Id === '' || ReceivingData.BranchSetting_Id === null) {
+   if(!ReceivingData.BranchSetting_Id || ReceivingData.BranchSetting_Id === '' || ReceivingData.BranchSetting_Id === null) {
       res.status(400).send({Status: false, Message: 'Branch details can\'t bew empty'});
    } else if(!ReceivingData.ConstitutionName || ReceivingData.ConstitutionName === '' || ReceivingData.ConstitutionName === null) {
       res.status(400).send({Status: false, Message: 'Constitution details can\'t bew empty'});
@@ -464,9 +450,9 @@ exports.ConstitutionSetting_Create = (req, res) => {
          Branch: mongoose.Types.ObjectId(ReceivingData.BranchSetting_Id),
          ConstitutionName: ReceivingData.ConstitutionName,
          Message: ReceivingData.Message,
-         CreatedBy: ReceivingData.User_Id,
-         UpdatedBy: ReceivingData.User_Id,
-         IfDeleted: false
+         IfDeleted: false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date()
       });
       Create_ConstitutionSetting.save((err, result) => {
          if(err) {
@@ -562,16 +548,14 @@ exports.ConstitutionSetting_Delete = (req, res) => {
 //Create Group Settings
 exports.GroupSetting_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else if(!ReceivingData.GroupName || ReceivingData.GroupName === '' || ReceivingData.GroupName === null) {
+   if(!ReceivingData.GroupName || ReceivingData.GroupName === '' || ReceivingData.GroupName === null) {
       res.status(400).send({Status: false, Message: 'Group details can\'t be empty'});
    } else {
       var Create_GroupSetting = new SettingsModel.GroupSettingSchema({
          GroupName: ReceivingData.GroupName,
-         CreatedBy: ReceivingData.User_Id,
-         UpdatedBy: ReceivingData.User_Id,
-         IfDeleted: false
+         IfDeleted: false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date()
       });
       Create_GroupSetting.save((err, result) => {
          if(err) {
@@ -674,9 +658,9 @@ exports.MemberApprovalPeriodSetting_Create = (req, res) => {
    } else{
       var Create_MemberApprovalPeriodSetting = new SettingsModel.MemberApprovalPeriodSettingSchema({
          ApprovalPeriod: ReceivingData.ApprovalPeriod,
-         CreatedBy: ReceivingData.User_Id,
-         UpdatedBy: ReceivingData.User_Id,
-         IfDeleted: false
+         IfDeleted: false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date()
       });
       Create_MemberApprovalPeriodSetting.save((err, result) => {
          if(err) {
@@ -770,16 +754,14 @@ exports.MemberApprovalPeriodSetting_Delete = (req, res) => {
 // Create Complaint Category Setting
 exports.ComplaintCategorySetting_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else if(!ReceivingData.ComplaintCategory || ReceivingData.ComplaintCategory === '' || ReceivingData.ApprovalPeriod === null) {
+   if(!ReceivingData.ComplaintCategory || ReceivingData.ComplaintCategory === '' || ReceivingData.ApprovalPeriod === null) {
       res.status(400).send({Status: false, Message: 'Complaint Category details can\'t be empty'});
    } else{
       var Create_ComplaintCategorySetting = new SettingsModel.ComplaintCategorySettingSchema({
          ComplaintCategory: ReceivingData.ComplaintCategory,
-         CreatedBy: ReceivingData.User_Id,
-         UpdatedBy: ReceivingData.User_Id,
-         IfDeleted: false
+         IfDeleted: false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date()
       });
       Create_ComplaintCategorySetting.save((err, result) => {
          if(err) {
@@ -874,16 +856,14 @@ exports.ComplaintCategorySetting_Delete = (req, res) => {
 // Create Advertisement Type Setting
 exports.AdvertisementTypeSetting_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else if(!ReceivingData.AdvertisementType || ReceivingData.AdvertisementType === '' || ReceivingData.AdvertisementType === null) {
+   if(!ReceivingData.AdvertisementType || ReceivingData.AdvertisementType === '' || ReceivingData.AdvertisementType === null) {
       res.status(400).send({Status: false, Message: 'Advertisement details can\'t be empty'});
    } else {
       var Create_AdvertisementTypeSetting = new SettingsModel.AdvertisementTypeSettingSchema({
          AdvertisementType : ReceivingData.AdvertisementType,
-         CreatedBy : ReceivingData.User_Id,
-         UpdatedBy : ReceivingData.User_Id,
-         IfDeleted : false
+         IfDeleted : false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date()
       });
       Create_AdvertisementTypeSetting.save((err, req) => {
          if(err) {
@@ -979,9 +959,7 @@ exports.AdvertisementTypeSetting_Delete = (req, res) => {
 // Create Booth Setting
 exports.BoothSetting_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else if(!ReceivingData.BoothName || ReceivingData.BoothName === '' || ReceivingData.BoothName === null) {
+   if(!ReceivingData.BoothName || ReceivingData.BoothName === '' || ReceivingData.BoothName === null) {
       res.status(400).send({Status: false, Message: 'Booth Name can\'t be empty'});
    } else if(!ReceivingData.BoothNumber || ReceivingData.BoothNumber === '' || ReceivingData.BoothNumber === null) {
       res.status(400).send({Status: false, Message: 'Booth Number can\'t be empty'});
@@ -989,9 +967,9 @@ exports.BoothSetting_Create = (req, res) => {
       var Create_BoothSetting = new SettingsModel.BoothSettingSchema({
          BoothName : ReceivingData.BoothName,
          BoothNumber : ReceivingData.BoothNumber,
-         CreatedBy :  ReceivingData.User_Id,
-         UpdatedBy : ReceivingData.User_Id,
-         IfDeleted : false
+         IfDeleted : false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date()
       });
       Create_BoothSetting.save((err, result) => {
          if(err) {
@@ -1042,9 +1020,7 @@ exports.BoothSetting_View = (req, res) => {
 // Edit Booth Setting
 exports.BoothSetting_Edit = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else if(!ReceivingData.BoothSetting_Id || ReceivingData.BoothSetting_Id === '' || ReceivingData.BoothSetting_Id === null) {
+   if(!ReceivingData.BoothSetting_Id || ReceivingData.BoothSetting_Id === '' || ReceivingData.BoothSetting_Id === null) {
       res.status(400).send({Status: false, Message: 'Booth details can\'t be empty'});
    } else if(!ReceivingData.BoothName || ReceivingData.BoothName === '' || ReceivingData.BoothName === null) {
       res.status(400).send({Status: false, Message: 'Booth name can\'t be empty'});
@@ -1088,9 +1064,7 @@ exports.BoothSetting_Delete = (req, res) => {
 // Create official designation Setting
 exports.OfficialDesignationSetting_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty'});
-   } else if(!ReceivingData.OfficialDesignation || ReceivingData.OfficialDesignation === '' || ReceivingData.OfficialDesignation === null) {
+   if(!ReceivingData.OfficialDesignation || ReceivingData.OfficialDesignation === '' || ReceivingData.OfficialDesignation === null) {
       res.status(400).send({Status: false, Message: 'Official Designation can\'t be empty'});
    } else if(!ReceivingData.IfDivision || ReceivingData.IfDivision === '' || ReceivingData.IfDivision === null) {
       res.status(400).send({Status: false, Message: 'Division can\'t be empty'});
@@ -1126,9 +1100,9 @@ exports.OfficialDesignationSetting_Create = (req, res) => {
          ZoneLevel: ReceivingData.ZoneLevel,
          BranchLevel: ReceivingData.BranchLevel,
          Message: ReceivingData.Message,
-         CreatedBy: ReceivingData.User_Id,
-         UpdatedBy: ReceivingData.User_Id,
          IfDeleted: false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date()
       });
       Create_OfficialDesignationSetting.save((err, result) => {
          if(err) {
@@ -1264,9 +1238,9 @@ exports.RelationShipType_Create = (req, res) => {
    } else {
       var Create_RelationShipType = new SettingsModel.RelationShipTypeSchema({
          RelationShipName : ReceivingData.RelationShipName,
-         CreatedBy : mongoose.Types.ObjectId(ReceivingData.User_Id),
-         UpdatedBy : mongoose.Types.ObjectId(ReceivingData.User_Id),
-         IfDeleted : false
+         IfDeleted : false,
+         CreatedAt : new Date(),
+         UpdatedAt : new Date()
       });
       Create_RelationShipType.save((err, result) => {
          if(err) {

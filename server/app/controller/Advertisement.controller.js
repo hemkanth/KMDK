@@ -84,6 +84,8 @@ exports.AppAdvertisement_Create = (req, res) => {
 exports.AppAdvertisement_List = (req, res) => {
     var ReceivingData = req.body;
     AdvertisementModel.AdvertisementSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
+    .populate({ path: 'CreatedBy', select: ['Name'] })
+    .populate({ path: 'UpdatedBy', select: ['Name'] })
     .exec((err, result) => {
         if(err) {
             res.status(417).send({Status: false, Message: 'Error in finding Advertisement'});
@@ -103,6 +105,8 @@ exports.AppAdvertisement_View = (req, res) => {
     } else {
         AdvertisementModel.AdvertisementSchema
         .findOne({IfDeleted: false, _id: mongoose.Types.ObjectId(ReceivingData.Advertisement_Id)}, {}, {})
+        .populate({ path: 'CreatedBy', select: ['Name'] })
+        .populate({ path: 'UpdatedBy', select: ['Name'] })
         .exec((err, result) => {
             if(err) {
                 res.status(417).send({Status: false, Message: 'Error in finding Advertisement'});

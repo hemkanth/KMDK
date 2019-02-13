@@ -52,7 +52,13 @@ exports.AppEnquiry_Create = (req, res) => {
 // List
 exports.AppEnquiry_List = (req, res) => {
     var ReceivingData = req.body;
-    EnquiryModel.EnquirySchema.find({IfDeleted: false}, {}, {})
+    EnquiryModel.EnquirySchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
+    .populate({ path: 'State', select: ['StateName'] })
+    .populate({ path: 'District', select: ['DistrictName'] })
+    .populate({ path: 'Zone', select: ['ZoneName'] })
+    .populate({ path: 'Branch', select: ['BranchName'] })
+    .populate({ path: 'CreatedBy', select: ['Name'] })
+    .populate({ path: 'UpdatedBy', select: ['Name'] })
     .exec((err, result) => {
         if(err) {
             res.status(417).send({Status: false, Message: 'Error in finding enquiry'});
@@ -69,6 +75,12 @@ exports.AppEnquiry_View = (req, res) => {
         res.status(400).send({Status: false, Message: 'Enquiry Details can\'t be empty' });
     } else {
         EnquiryModel.EnquirySchema.findOne({IfDeleted: false, _id: mongoose.Types.ObjectId(ReceivingData.Enquiry_Id)}, {}, {})
+        .populate({ path: 'State', select: ['StateName'] })
+        .populate({ path: 'District', select: ['DistrictName'] })
+        .populate({ path: 'Zone', select: ['ZoneName'] })
+        .populate({ path: 'Branch', select: ['BranchName'] })
+        .populate({ path: 'CreatedBy', select: ['Name'] })
+        .populate({ path: 'UpdatedBy', select: ['Name'] })
         .exec((err, result) => {
             if(err) {
                 res.status(417).send({Status: false, Message: 'Error in finding enquiry'});

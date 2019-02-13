@@ -92,7 +92,7 @@ var EventsImageUpload = multer({
 exports.AppEvents_List = (req, res) => {
     var ReceivingData = req.body;
     EventsModel.EventsSchema
-    .find({IfDeleted: false}, {}, {sort: {UpdatedAt: -1}})
+    .find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
     .populate({ path: 'State', select: ['StateName'] })
     .populate({ path: 'District', select: ['DistrictName'] })
     .populate({ path: 'Zone', select: ['ZoneName'] })

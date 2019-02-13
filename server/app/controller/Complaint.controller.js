@@ -124,7 +124,13 @@ exports.AppComplaint_Create = (req, res) => {
 // Complaint List
 exports.AppComplaint_List = (req, res) => {
     var ReceivingData = req.body;
-    ComplaintModel.ComplaintSchema.find({IfDeleted: false}, {}, {})
+    ComplaintModel.ComplaintSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
+    .populate({ path: 'State', select: ['StateName'] })
+    .populate({ path: 'District', select: ['DistrictName'] })
+    .populate({ path: 'Zone', select: ['ZoneName'] })
+    .populate({ path: 'Branch', select: ['BranchName'] })
+    .populate({ path: 'CreatedBy', select: ['Name'] })
+    .populate({ path: 'UpdatedBy', select: ['Name'] })
     .exec((err, result) => {
         if(err) {
             res.status(417).send({Status: false, Message: 'Error in finding Complaint'});
@@ -141,6 +147,12 @@ exports.AppComplaint_View = (req, res) => {
         res.status(400).send({Status: false, Message: 'Complaint Details can\'t be empty'});
     } else {
         ComplaintModel.ComplaintSchema.findOne({IfDeleted: false, _id: mongoose.Types.ObjectId(ReceivingData.Complaint_Id)}, {}, {})
+        .populate({ path: 'State', select: ['StateName'] })
+        .populate({ path: 'District', select: ['DistrictName'] })
+        .populate({ path: 'Zone', select: ['ZoneName'] })
+        .populate({ path: 'Branch', select: ['BranchName'] })
+        .populate({ path: 'CreatedBy', select: ['Name'] })
+        .populate({ path: 'UpdatedBy', select: ['Name'] })
         .exec((err, result) => {
             if(err) {
                 res.status(417).send({Status: false, Message: 'Error in finding Complaint'});

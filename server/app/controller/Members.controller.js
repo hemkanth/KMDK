@@ -207,11 +207,13 @@ exports.AppMembers_List = (req, res) => {
     var ReceivingData = req.body;
 
     MembersModel.MembersSchema
-    .find({IfDeleted: false, ActiveStatus: true}, {}, {$sort: {CreatedAt: -1}})
+    .find({IfDeleted: false, ActiveStatus: true}, {}, {$sort: {UpdatedAt: -1}})
     .populate({ path: 'State', select: ['StateName'] })
     .populate({ path: 'District', select: ['DistrictName'] })
     .populate({ path: 'Zone', select: ['ZoneName'] })
     .populate({ path: 'Branch', select: ['BranchName'] })
+    .populate({ path: 'CreatedBy', select: ['Name'] })
+    .populate({ path: 'UpdatedBy', select: ['Name'] })
     .exec((err, result) =>{
         if(err) {
             res.status(417).send({Status: false, Message: 'Error in listing Member'});
@@ -234,6 +236,8 @@ exports.AppMembers_View = (req, res) => {
         .populate({ path: 'District', select: ['DistrictName'] })
         .populate({ path: 'Zone', select: ['ZoneName'] })
         .populate({ path: 'Branch', select: ['BranchName'] })
+        .populate({ path: 'CreatedBy', select: ['Name'] })
+        .populate({ path: 'UpdatedBy', select: ['Name'] })
         .exec((err, result) => {
             if(err) {
                 res.status(417).send({Status: false, Message: 'Error in Finding Member'});
