@@ -19,6 +19,10 @@
 {
    margin-left: 32px !important;
 }
+.ng-select .ng-select-container .ng-value-container .ng-placeholder
+{
+    font-size: 12px !important;
+}
 .ng-dropdown-panel.ng-select-bottom
 {
     margin-left: 32px !important;

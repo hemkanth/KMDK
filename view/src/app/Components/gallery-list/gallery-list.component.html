@@ -110,15 +110,26 @@
           </div>
             <div class="modal-body text-center">
                 <div class="form-section">
-                  <form [formGroup]="editForm">                                                      
-                      <div class="frm-field">
-                          <div class="frm-lbl">புகைப்பட பெயர்</div>
-                          <div class="frm-input"><input formControlName="galleryname" /></div>
-                      </div>                      
-                      <div class="frm-field">
-                          <div class="frm-lbl">படம்</div>
-                          <div class="frm-input"><input type="file" formControlName="galleryimage" /></div>
-                      </div>                               
+                  <form [formGroup]="editForm">
+                        <div class="frm-field">
+                            <div class="frm-lbl">ஆல்பம் பெயர்</div>
+                            <div class="frm-input">
+                                <ng-select class="ng-select ng-select-single" formControlName="state"
+                                    [items]="Albumlist"
+                                    [bindLabel]="'label'"
+                                    [bindValue]="'value'"
+                                    placeholder="ஆல்பம் தேர்வு">
+                                </ng-select>    
+                            </div>
+                        </div>                                                       
+                        <div class="frm-field">
+                            <div class="frm-lbl">புகைப்பட பெயர்</div>
+                            <div class="frm-input"><input formControlName="galleryname" /></div>
+                        </div>                      
+                        <div class="frm-field">
+                            <div class="frm-lbl">படம்</div>
+                            <div class="frm-input"><input type="file" formControlName="galleryimage" /></div>
+                        </div>                               
                   </form>                         
                 </div>
             </div>
@@ -139,9 +150,11 @@
             <div class="modal-body">
                 <div class="form-section">
                     <div class="form">                              
-                      <div class="icon">                                                               
-                          <p>பெயர் : பத்திரிகை சந்திப்பு</p> 
-                          <p>படம் : 	</p>                                                                                                
+                      <div class="icon">          
+                        <p>ஆல்பம் பெயர் : </p>                                                     
+                        <p>புகைப்பட பெயர்></p>
+                        <p>பெயர் : பத்திரிகை சந்திப்பு</p> 
+                        <p>படம் : 	</p>                                                                                                
                       </div>                              
                     </div>
                   </div>
@@ -154,15 +167,26 @@
             </div>
               <div class="modal-body text-center">
                   <div class="form-section">
-                    <form [formGroup]="editForm">                                                      
+                    <form [formGroup]="editForm">   
                             <div class="frm-field">
-                                    <div class="frm-lbl">புகைப்பட பெயர்</div>
-                                    <div class="frm-input"><input formControlName="galleryname" /></div>
-                                </div>                      
-                                <div class="frm-field">
-                                    <div class="frm-lbl">படம்</div>
-                                    <div class="frm-input"><input type="file" formControlName="galleryimage" /></div>
-                                </div>                                                 
+                                <div class="frm-lbl">ஆல்பம் பெயர்</div>
+                                <div class="frm-input">
+                                    <ng-select class="ng-select ng-select-single" formControlName="state"
+                                        [items]="Albumlist"
+                                        [bindLabel]="'label'"
+                                        [bindValue]="'value'"
+                                        placeholder="ஆல்பம் தேர்வு">
+                                    </ng-select> 
+                                </div>
+                            </div>                                                    
+                            <div class="frm-field">
+                                <div class="frm-lbl">புகைப்பட பெயர்</div>
+                                <div class="frm-input"><input formControlName="galleryname" /></div>
+                            </div>                      
+                            <div class="frm-field">
+                                <div class="frm-lbl">படம்</div>
+                                <div class="frm-input"><input type="file" formControlName="galleryimage" /></div>
+                            </div>                                                 
                     </form>                         
                   </div>
               </div>

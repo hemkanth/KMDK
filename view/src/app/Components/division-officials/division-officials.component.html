@@ -21,7 +21,7 @@
           <tr>
             <th>வ.எண்</th>
             <th>நிர்வாகி பெயர்</th>
-            <th>கிளை </th>                                    
+            <th>அணி </th>                                    
             <th>நடவடிக்கை</th>
           </tr>
         </thead>
@@ -29,7 +29,7 @@
           <tr>
             <td>1</td>
             <td class="nme">நிர்வாகி 1</td>  
-            <td>கிளை 1</td>            
+            <td>அணி 1</td>            
             <td>
                 <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
                 <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
@@ -39,7 +39,7 @@
           <tr>
             <td>2</td>
             <td class="nme">நிர்வாகி 2</td>           
-            <td>கிளை 2</td>            
+            <td>அணி 2</td>            
             <td>
                 <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
                   <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
@@ -49,7 +49,7 @@
             <tr>
               <td>3</td>
               <td class="nme">நிர்வாகி 3</td>
-              <td>கிளை 2</td>                         
+              <td>அணி 2</td>                         
               <td>
                   <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
                   <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
@@ -59,7 +59,7 @@
             <tr>
               <td>4</td>
               <td class="nme">நிர்வாகி 4</td>  
-              <td>கிளை 3</td>                   
+              <td>அணி 3</td>                   
               <td>
                   <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
                   <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
@@ -72,7 +72,7 @@
             <tr>
               <td>5</td>
               <td class="nme">நிர்வாகி 5</td>             
-              <td>கிளை 3</td>              
+              <td>அணி 3</td>              
               <td>                                 
                   <button type="button" class="btn btn-primary" (click)="openViewModal(viewtemplate)"><i class="fa fa-eye"></i></button>
                   <button type="button" class="btn btn-warning" (click)="openEditModal(edittemplate)"><i class="fa fa-edit"></i></button>
@@ -108,13 +108,13 @@
                                   </div>
                               </div>                                                         
                               <div class="frm-field">
-                                  <div class="frm-lbl">கிளை </div>
+                                  <div class="frm-lbl">அணி </div>
                                   <div class="frm-input">
                                       <ng-select class="ng-select ng-select-multiple" 
-                                      [items]="Branchlist"
+                                      [items]="Divisionlist"
                                       [bindLabel]="'label'"
                                       [bindValue]="'value'"
-                                      placeholder="கிளை தேர்வு">
+                                      placeholder="அணி தேர்வு">
                                     </ng-select>                                   
                                     </div>    
                               </div>                             
@@ -147,13 +147,13 @@
                                       </div>
                                   </div>                                  
                                   <div class="frm-field">
-                                      <div class="frm-lbl">கிளை </div>
+                                      <div class="frm-lbl">அணி </div>
                                       <div class="frm-input">
                                           <ng-select class="ng-select ng-select-multiple" 
-                                          [items]="Branchlist"
+                                          [items]="Divisionlist"
                                           [bindLabel]="'label'"
                                           [bindValue]="'value'"
-                                          placeholder="கிளை தேர்வு">
+                                          placeholder="அணி தேர்வு">
                                         </ng-select>                                        
                                         </div>    
                                   </div>                             
@@ -178,8 +178,8 @@
                           <div class="form-section">
                               <div class="form">                              
                                 <div class="icon">                                                               
-                                    <p>நிர்வாகி : பிரிவு</p>                                     
-                                    <p>கிளை : கிளை</p>
+                                    <p>நிர்வாகி : நிர்வாகி</p>                                     
+                                    <p>அணி : அணி</p>
                                 </div>                              
                               </div>
                             </div>

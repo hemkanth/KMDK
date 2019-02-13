@@ -34,7 +34,8 @@ import { MemberRejectedListComponent } from './Components/member-rejected-list/m
 import { AdvertisementListComponent } from './Components/advertisement-list/advertisement-list.component';
 import { PartyAffiliationComponent } from './Components/party-affiliation/party-affiliation.component';
 import { RelationshipTypeComponent } from './Components/relationship-type/relationship-type.component';
-
+import { AlbumListComponent} from './Components/album-list/album-list.component';
+import { UserManagementComponent } from './Components/user-management/user-management.component';
 
 const appRoutes: Routes = [
     { path: '',
@@ -153,6 +154,12 @@ const appRoutes: Routes = [
         animation: { value: 'relationship-type', }
         }
     },
+    { path: 'album-list',
+    component: AlbumListComponent,
+    data: {
+        animation: { value: 'album-list', }
+        }
+    },
     { path: 'events-list',
     component: EventsListComponent,
     data: {
@@ -223,6 +230,12 @@ const appRoutes: Routes = [
         component: PartyAffiliationComponent,
         data: {
             animation: { value: 'party-affiliation', }
+        }
+    },
+    { path: 'user-management',
+        component: UserManagementComponent,
+        data: {
+            animation: { value: 'user-management', }
         }
     }
 ];

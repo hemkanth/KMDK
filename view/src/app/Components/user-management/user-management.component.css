@@ -1,4 +1,4 @@
-.District_Section {
+.User_Section {
     width: 78%;
     margin-left: 20%; 
 }
@@ -126,14 +126,14 @@
 }
 .frm-lbl
 {
-    width: 28%;
+    width: 23%;
     float: left;
     font-size: 12px;
     text-align: left;
 }
 .frm-input
 {
-    width: 71%;
+    width: 76%;
     float: left;    
 }
 .update-button
