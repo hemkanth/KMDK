@@ -21,7 +21,7 @@ var EventsSchema = mongoose.Schema({
     {timestamp: true}
 );
 
-var VarEventsSchema = mongoose.Schema('Events', EventsSchema, 'Events_List');
+var VarEventsSchema = mongoose.model('Events', EventsSchema, 'Events_List');
 
 module.exports = {
     EventsSchema : VarEventsSchema,

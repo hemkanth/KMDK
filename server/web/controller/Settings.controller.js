@@ -25,7 +25,7 @@ exports.StateSettings_Create = (req, res) => {
          }
       });
    }
-}
+};
 
 // List State of State Settings
 exports.StateSettings_List = (req, res) => {
@@ -42,7 +42,7 @@ exports.StateSettings_List = (req, res) => {
          }
       });
    }
-}
+};
 
 // View State in State Setting
 exports.StateSettings_View = (req, res) => {
@@ -62,7 +62,7 @@ exports.StateSettings_View = (req, res) => {
          }
       });
    }
-}
+};
 
 // Edit State in State Setting
 exports.StateSettings_Edit = (req, res) => {
@@ -84,7 +84,7 @@ exports.StateSettings_Edit = (req, res) => {
          }
       });
    }
-}
+};
 
 // Delete State in State Setting
 exports.StateSettings_Delete = (req, res) => {
@@ -105,7 +105,7 @@ exports.StateSettings_Delete = (req, res) => {
          }
       });
    }
-}
+};
 
 // ***************************************** Division Settings **************************************
 
@@ -135,7 +135,7 @@ exports.DistrictSettings_Create = (req, res) => {
          }
       });
    }
-}
+};
 
 // List District from District Setting
 exports.DistrictSettings_List = (req, res) => {
@@ -153,7 +153,7 @@ exports.DistrictSettings_List = (req, res) => {
          }
       });
    } 
-}
+};
 
 // View District from District Settings
 exports.DistrictSettings_View = (req, res) => {
@@ -173,7 +173,7 @@ exports.DistrictSettings_View = (req, res) => {
          }
       });
    }
-}
+};
 
 // Edit District from District Settings
 exports.DistrictSettings_Edit = (req, res) => {
@@ -195,7 +195,7 @@ exports.DistrictSettings_Edit = (req, res) => {
          }
       });
    }
-}
+};
 
 // Delete District from District Settings
 exports.DistrictSettings_Delete = (req, res) => {
@@ -215,7 +215,7 @@ exports.DistrictSettings_Delete = (req, res) => {
          }
       });
    }
-}
+};
 
 // ***************************************** Zone Settings **************************************
 
@@ -1249,6 +1249,106 @@ exports.OfficialDesignationSetting_Delete = (req, res) => {
             res.status(417).send({Status: false, Message: 'Error in deleting Official Designation'});
          } else {
             res.status(200).send({Status: true, Message: 'Successfully deleted Official Designation'});
+         }
+      });
+   }
+}
+// ******************************* Relationship type ********************************
+// Create
+exports.RelationShipType_Create = (req, res) => {
+   var ReceivingData = req.body.Info;
+   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
+      res.status(400).send({Status: false, Message: 'User details can\'t be empty' });
+   } else if(!ReceivingData.RelationShipName || ReceivingData.RelationShipName === '' || ReceivingData.RelationShipName === null) {
+      res.status(400).send({Status: false, Message: 'Relation Ship Name can\'t be empty' });
+   } else {
+      var Create_RelationShipType = new SettingsModel.RelationShipTypeSchema({
+         RelationShipName : ReceivingData.RelationShipName,
+         CreatedBy : mongoose.Types.ObjectId(ReceivingData.User_Id),
+         UpdatedBy : mongoose.Types.ObjectId(ReceivingData.User_Id),
+         IfDeleted : false
+      });
+      Create_RelationShipType.save((err, result) => {
+         if(err) {
+            res.status(417).send({Status: false, Message: 'Error in saving Relationship type'});
+         } else {
+            res.status(200).send({Status: true, Message: 'Successfully Relationship Type saved'});
+         }
+      });
+   }
+}
+
+// List
+exports.RelationShipType_List = (req, res) => {
+   var ReceivingData = req.body.Info;
+   SettingsModel.RelationShipTypeSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
+   .exec((err, result) => {
+      if(err) {
+         res.status(417).send({Status: false, Message: 'Error in finding Relationship Type'});
+      } else {
+         res.status(200).send({Status: true, Response: result});
+      }
+   });
+}
+
+// View State in State Setting
+exports.RelationShipType_View = (req, res) => {
+   var ReceivingData = req.body.Info;
+   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
+      res.status(400).send({Status: false, Message: 'User details can\'t be empty' });
+   } else if(!ReceivingData.RelationShip_Id || ReceivingData.RelationShip_Id === '' || ReceivingData.RelationShip_Id === null) {
+      res.status(400).send({Status: false, Message: 'RelationShip Details can\'t be empty' });
+   } else {
+      SettingsModel.RelationShipTypeSchema
+      .findOne({_id: mongoose.Types.ObjectId(ReceivingData.RelationShip_Id), IfDeleted: false}, {}, {})
+      .exec((err, result) => {
+         if(err) {
+            res.status(417).send({Status: false, Message: 'Error in finding RelationShip'});
+         } else {
+            res.status(200).send({Status: true, Response: result});
+         }
+      });
+   }
+}
+
+// Edit State in State Setting
+exports.RelationShipType_Edit = (req, res) => {
+   var ReceivingData = req.body.Info;
+   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
+      res.status(400).send({Status: false, Message: 'User details can\'t be empty' });
+   } else if(!ReceivingData.RelationShip_Id || ReceivingData.RelationShip_Id === '' || ReceivingData.RelationShip_Id === null) {
+      res.status(400).send({Status: false, Message: 'State Details can\'t be empty' });
+   } else if(!ReceivingData.RelationShipName || ReceivingData.RelationShipName === '' || ReceivingData.RelationShipName === null) {
+      res.status(400).send({Status: false, Message: 'RelationShip name can\'t be empty' });
+   } else {
+      SettingsModel.StateSettingSchema
+      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.RelationShip_Id), IfDeleted: false}, {$set: {RelationShipName: ReceivingData.RelationShipName, UpdatedBy: mongoose.Types.ObjectId(ReceivingData.User_Id)}})
+      .exec((err, result) => {
+         if(err) {
+            res.status(417).send({Status: false, Message: 'Error in updating RelationShip'});
+         } else {
+            res.status(200).send({Status: true, Message: 'Successfully RelationShip updated'});
+         }
+      });
+   }
+}
+
+// Delete 
+exports.RelationShipType_Delete = (req, res) => {
+   var ReceivingData = req.body.Info;
+   
+   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
+      res.status(400).send({Status: false, Message: 'User details can\'t be empty' });
+   } else if(!ReceivingData.RelationShip_Id || ReceivingData.RelationShip_Id === '' || ReceivingData.RelationShip_Id === null) {
+      res.status(400).send({Status: false, Message: 'State Details can\'t be empty' });
+   } else {
+      SettingsModel.StateSettingSchema
+      .updateMany({_id: mongoose.Types.ObjectId(ReceivingData.RelationShip_Id), IfDeleted: false}, {$set: {IfDeleted: true, UpdatedBy: mongoose.Types.ObjectId(ReceivingData.User_Id)}})
+      .exec((err, result) => {
+         if(err) {
+            res.status(417).send({Status: false, Message: 'Error in deleting RelationShip'});
+         } else {
+            res.status(200).send({Status: true, Message: 'Successfully RelationShip deleted'});
          }
       });
    }

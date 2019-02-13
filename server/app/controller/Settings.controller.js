@@ -194,3 +194,20 @@ exports.AppOfficialDesignationSetting_List = (req, res) => {
       }
    });
 }
+
+
+// ************************************** RelationShip Type Setting ******************************************
+
+// App Relation Type Setting
+exports.AppRelationShipType_List = (req, res) => {
+   var ReceivingData = req.body;
+   SettingsModel.RelationShipTypeSchema.find({IfDeleted: false}, {}, {sort: {updatedAt: -1}})
+   .exec((err, result) => {
+      if(err) {
+         res.status(417).send({Status: false, Message: 'Error in finding Relationship Type'});
+      } else {
+         res.status(200).send({Status: true, Response: result});
+      }
+   });
+}
+

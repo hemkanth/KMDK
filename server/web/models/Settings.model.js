@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 // State Settings Schema
 var StateSettingSchema = mongoose.Schema({
    StateName: { type: String, required: true, unique: true },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: Boolean, required: true }
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    }, 
    {timestamp: true}
 );
@@ -17,9 +17,9 @@ var DistrictSettingSchema = mongoose.Schema({
    State: { type: Schema.Types.ObjectId, ref: 'StateSetting' },
    DistrictName: { type: String, required: true, unique: true },
    Message: { type: String },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: Boolean, required: true }
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 );
@@ -31,9 +31,9 @@ var ZoneSettingSchema = mongoose.Schema({
    District: { type: Schema.Types.ObjectId, ref: 'DistrictSetting', required: true },
    ZoneName: { type: String, required: true, unique: true },
    Message: { type: String },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: Boolean, required: true }
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 );
@@ -46,9 +46,9 @@ var BranchSettingSchema = mongoose.Schema({
    Zone: { type: Schema.Types.ObjectId, ref: 'ZoneSetting', required: true },
    BranchName: { type: String, required: true },
    Message: { type: String },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: Boolean, required: true }
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 )
@@ -59,9 +59,9 @@ var ConstitutionSettingSchema = mongoose.Schema({
    Branch: { type: Schema.Types.ObjectId, ref: 'BranchSetting', required: true },
    ConstitutionName: { type: String, required: true, unique: true },
    Message: { type: String },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: Boolean, required: true }
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 );
@@ -70,9 +70,9 @@ var VarConstitutionSettingSchema = mongoose.model('ConstitutionSetting', Constit
 // Group Setting Schema
 var GroupSettingSchema = mongoose.Schema({
    GroupName: { type: String, required: true, unique: true },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: Boolean, required: true }
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 );
@@ -81,9 +81,9 @@ var VarGroupSettingSchema = mongoose.model('GroupSetting', GroupSettingSchema, '
 // Member Approval Period Setting Schema
 var MemberApprovalPeriodSettingSchema = mongoose.Schema({
    ApprovalPeriod: { type: String, required: true },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
    IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 );
@@ -92,9 +92,9 @@ var VarMemberApprovalPeriodSettingSchema = mongoose.model('MemberApprovalPeriodS
 // Complaint Category Setting Schema
 var ComplaintCategorySettingSchema = mongoose.Schema({
    ComplaintCategory: { type: String, required: true, unique: true },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: Boolean, required: true }
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 );
@@ -103,9 +103,9 @@ var VarComplaintCategorySettingSchema = mongoose.model('ComplaintCategorySetting
 // Advertisement Type Setting Schema
 var AdvertisementTypeSettingSchema = mongoose.Schema({
    AdvertisementType: { type: String, required: true, unique: true },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: Boolean, required: true }
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 );
@@ -116,9 +116,9 @@ var BoothSettingSchema = mongoose.Schema({
    BoothName: { type: String, required: true },
    BoothNumber: { type: String, required: true },
    Message: { type: String },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: Boolean, required: true }
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 );
@@ -138,13 +138,24 @@ var OfficialDesignationSettingSchema = mongoose.Schema({
    ZoneLevel: { type: Boolean, required: true },
    BranchLevel: { type: Boolean, required: true },
    Message: { type: String },
-   CreatedBy: { type: String },
-   UpdatedBy: { type: String },
-   IfDeleted: { type: String },
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
    },
    {timestamp: true}
 );
 var VarOfficialDesignationSettingSchema = mongoose.model('OfficialDesignationSetting', OfficialDesignationSettingSchema, 'OfficialDesignationSetting_List');
+
+// RelationShip Type
+var RelationShipTypeSchema = mongoose.Schema({
+   RelationShipName : {type: String, required: true, unique: true},
+   IfDeleted: { type: Boolean, required: true },
+   CreatedAt: { type: Date, required: true},
+   UpdatedAt: { type: Date, required: true }
+   },
+   {timestamp: true}
+);
+var VarRelationShipTypeSchema = mongoose.model('RelationShipType', RelationShipTypeSchema, 'RelationShipType_List');
 
 // Export Schema
 module.exports = {
@@ -158,5 +169,6 @@ module.exports = {
    ComplaintCategorySettingSchema : VarComplaintCategorySettingSchema,
    AdvertisementTypeSettingSchema : VarAdvertisementTypeSettingSchema,
    BoothSettingSchema : VarBoothSettingSchema,
-   OfficialDesignationSettingSchema : VarOfficialDesignationSettingSchema
+   OfficialDesignationSettingSchema : VarOfficialDesignationSettingSchema,
+   RelationShipTypeSchema : VarRelationShipTypeSchema
 } 

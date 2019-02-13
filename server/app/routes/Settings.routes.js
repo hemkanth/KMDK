@@ -16,5 +16,7 @@ module.exports = (app) => {
    app.post('/API/Settings/AppAdvertisementTypeList', SettingsController.AppAdvertisementTypeSetting_List);
    app.post('/API/Settings/AppBoothList', SettingsController.AppBoothSetting_List);
    app.post('/API/Settings/AppOfficialDesignationList', SettingsController.AppOfficialDesignationSetting_List);
+   app.post('/API/Settings/AppRelationShipTypeList', SettingsController.AppRelationShipType_List);
+
 
 }

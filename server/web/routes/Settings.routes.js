@@ -73,4 +73,11 @@ module.exports = (app) => {
    app.post('/API/Settings/OfficialDesignationView', SettingsController.OfficialDesignationSetting_View);
    app.post('/API/Settings/OfficialDesignationEdit', SettingsController.OfficialDesignationSetting_Edit);
    app.post('/API/Settings/OfficialDesignationDelete', SettingsController.OfficialDesignationSetting_Delete);
+
+   // RelationShipType Settings Routes
+   app.post('/API/Settings/RelationShipTypeCreate', SettingsController.RelationShipType_Create);
+   app.post('/API/Settings/RelationShipTypeList', SettingsController.RelationShipType_List);
+   app.post('/API/Settings/RelationShipTypeView', SettingsController.RelationShipType_View);
+   app.post('/API/Settings/RelationShipTypeEdit', SettingsController.RelationShipType_Edit);
+   app.post('/API/Settings/RelationShipTypeDelete', SettingsController.RelationShipType_Delete);
 }

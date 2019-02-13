@@ -10,7 +10,7 @@ var ErrorManagement = require('./server/handling/ErrorHandling.js');
 var LogManagement = require('./server/handling/LogHandling.js');
 
 // set port & assign var to express function
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 var app = express();
 
 // process.setMaxListeners(0);
@@ -35,12 +35,17 @@ require('./server/web/routes/Members.routes.js')(app); // Members Routes
 // *********************** import App routes file ***************************
 require('./server/app/routes/Settings.routes.js')(app); // Settings Routes
 require('./server/app/routes/Members.routes.js')(app); // Members Routes
+require('./server/app/routes/Event.routes.js')(app); // Event Routes
+require('./server/app/routes/Enquiry.routes.js')(app); // Enquiry Routes
+require('./server/app/routes/Complaint.routes.js')(app); // Complaint Routes
+require('./server/app/routes/Advertisement.routes.js')(app); // Advertisement Routes
 
-app.use(express.static(__dirname + '/view/dist/view/'));
 
-app.use(function(req, res) {
-   res.sendFile(path.join(__dirname, '/view/dist/view', 'index.html'));
-});
+// app.use(express.static(__dirname + '/view/dist/view/'));
+
+// app.use(function(req, res) {
+//    res.sendFile(path.join(__dirname, '/view/dist/view', 'index.html'));
+// });
 
 app.get('*', function(req, res){
    res.send('This is Server Side Page');
