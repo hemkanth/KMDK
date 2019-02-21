@@ -7,37 +7,24 @@ var EnquiryModel = require('../../web/models/Enquiry.model.js');
 exports.AppEnquiry_Create = (req, res) => {
     var ReceivingData = req.body;
 
-    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-        res.status(400).send({Status: false, Message: 'User Details can\'t be empty' });
-    } else if(!ReceivingData.Name || ReceivingData.Name === '' || ReceivingData.Name === null) {
+    if(!ReceivingData.Name || ReceivingData.Name === '' || ReceivingData.Name === null) {
         res.status(400).send({Status: false, Message: 'Name can\'t be empty' });
     } else if(!ReceivingData.Place || ReceivingData.Place === '' || ReceivingData.Place === null) {
         res.status(400).send({Status: false, Message: 'Place Details can\'t be empty' });
     } else if(!ReceivingData.Message || ReceivingData.Message === '' || ReceivingData.Message === null) {
         res.status(400).send({Status: false, Message: 'Message Details can\'t be empty' });
-    } else if(!ReceivingData.State_Id || ReceivingData.State_Id === '' || ReceivingData.State_Id === null) {
-        res.status(400).send({Status: false, Message: 'State Details can\'t be empty' });
-    } else if(!ReceivingData.District_Id || ReceivingData.District_Id === '' || ReceivingData.District_Id === null) {
-        res.status(400).send({Status: false, Message: 'District Details can\'t be empty' });
-    } else if(!ReceivingData.Zone_Id || ReceivingData.Zone_Id === '' || ReceivingData.Zone_Id === null) {
-        res.status(400).send({Status: false, Message: 'Zone Details can\'t be empty' });
-    } else if(!ReceivingData.Branch_Id || ReceivingData.Branch_Id === '' || ReceivingData.Branch_Id === null) {
-        res.status(400).send({Status: false, Message: 'Branch Details can\'t be empty' });
     } else {
+        var tempUserId = (!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) ? null : mongoose.Types.ObjectId(ReceivingData.User_Id);
         var Create_Enquiry = new EnquiryModel.EnquirySchema({
             Name: ReceivingData.Name,
             Place: ReceivingData.Place,
             Date: new Date(),
             Message: ReceivingData.Message,
-            State: mongoose.Types.ObjectId(ReceivingData.State_Id),
-            District: mongoose.Types.ObjectId(ReceivingData.District_Id),
-            Zone: mongoose.Types.ObjectId(ReceivingData.Zone_Id),
-            Branch: mongoose.Types.ObjectId(ReceivingData.Branch_Id),
             CreatedAt: new Date(),
             UpdatedAt: new Date(),
             IfDeleted: false,
-            CreatedBy: mongoose.Types.ObjectId(ReceivingData.User_Id),
-            UpdatedBy : mongoose.Types.ObjectId(ReceivingData.User_Id) 
+            CreatedBy: tempUserId,
+            UpdatedBy : tempUserId 
         });
         Create_Enquiry.save((err, result) => {
             if(err) {
@@ -53,10 +40,6 @@ exports.AppEnquiry_Create = (req, res) => {
 exports.AppEnquiry_List = (req, res) => {
     var ReceivingData = req.body;
     EnquiryModel.EnquirySchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
-    .populate({ path: 'State', select: ['StateName'] })
-    .populate({ path: 'District', select: ['DistrictName'] })
-    .populate({ path: 'Zone', select: ['ZoneName'] })
-    .populate({ path: 'Branch', select: ['BranchName'] })
     .populate({ path: 'CreatedBy', select: ['Name'] })
     .populate({ path: 'UpdatedBy', select: ['Name'] })
     .exec((err, result) => {
@@ -75,10 +58,6 @@ exports.AppEnquiry_View = (req, res) => {
         res.status(400).send({Status: false, Message: 'Enquiry Details can\'t be empty' });
     } else {
         EnquiryModel.EnquirySchema.findOne({IfDeleted: false, _id: mongoose.Types.ObjectId(ReceivingData.Enquiry_Id)}, {}, {})
-        .populate({ path: 'State', select: ['StateName'] })
-        .populate({ path: 'District', select: ['DistrictName'] })
-        .populate({ path: 'Zone', select: ['ZoneName'] })
-        .populate({ path: 'Branch', select: ['BranchName'] })
         .populate({ path: 'CreatedBy', select: ['Name'] })
         .populate({ path: 'UpdatedBy', select: ['Name'] })
         .exec((err, result) => {
@@ -104,26 +83,15 @@ exports.AppEnquiry_Edit = (req, res) => {
         res.status(400).send({Status: false, Message: 'Place Details can\'t be empty' });
     } else if(!ReceivingData.Message || ReceivingData.Message === '' || ReceivingData.Message === null) {
         res.status(400).send({Status: false, Message: 'Message Details can\'t be empty' });
-    } else if(!ReceivingData.State_Id || ReceivingData.State_Id === '' || ReceivingData.State_Id === null) {
-        res.status(400).send({Status: false, Message: 'State Details can\'t be empty' });
-    } else if(!ReceivingData.District_Id || ReceivingData.District_Id === '' || ReceivingData.District_Id === null) {
-        res.status(400).send({Status: false, Message: 'District Details can\'t be empty' });
-    } else if(!ReceivingData.Zone_Id || ReceivingData.Zone_Id === '' || ReceivingData.Zone_Id === null) {
-        res.status(400).send({Status: false, Message: 'Zone Details can\'t be empty' });
-    } else if(!ReceivingData.Branch_Id || ReceivingData.Branch_Id === '' || ReceivingData.Branch_Id === null) {
-        res.status(400).send({Status: false, Message: 'Branch Details can\'t be empty' });
     } else {
+        var tempUserId = (!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) ? null : mongoose.Types.ObjectId(ReceivingData.User_Id);
         EnquiryModel.EnquirySchema.updateMany({IfDeleted: false, _id: mongoose.Types.ObjectId(ReceivingData.Enquiry_Id)},
         {$set: {
             Name: ReceivingData.Name,
             Place: ReceivingData.Place,
             Message: ReceivingData.Message,
-            State: mongoose.Types.ObjectId(ReceivingData.State_Id),
-            District: mongoose.Types.ObjectId(ReceivingData.District_Id),
-            Zone: mongoose.Types.ObjectId(ReceivingData.Zone_Id),
-            Branch: mongoose.Types.ObjectId(ReceivingData.Branch_Id),
             UpdatedAt: new Date(),
-            UpdatedBy : mongoose.Types.ObjectId(ReceivingData.User_Id)
+            UpdatedBy : tempUserId
         }})
         .exec((err, result) => {
             if(err) {
@@ -138,16 +106,15 @@ exports.AppEnquiry_Edit = (req, res) => {
 // Delete
 exports.AppEnquiry_Delete = (req, res) => {
     var ReceivingData = req.body;
-    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-        res.status(400).send({Status: false, Message: 'User Details can\'t be empty' });
-    } else if(!ReceivingData.Enquiry_Id || ReceivingData.Enquiry_Id === '' || ReceivingData.Enquiry_Id === null) {
+    if(!ReceivingData.Enquiry_Id || ReceivingData.Enquiry_Id === '' || ReceivingData.Enquiry_Id === null) {
         res.status(400).send({Status: false, Message: 'Enquiry Details can\'t be empty' });
     } else {
+        var tempUserId = (!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) ? null : mongoose.Types.ObjectId(ReceivingData.User_Id);
         EnquiryModel.EnquirySchema.updateMany({IfDeleted: false, _id: mongoose.Types.ObjectId(ReceivingData.Enquiry_Id)},
         {$set: {
             IfDeleted: true,
             UpdatedAt: new Date(),
-            UpdatedBy : mongoose.Types.ObjectId(ReceivingData.User_Id)
+            UpdatedBy : tempUserId
         }})
         .exec((err, result) => {
             if(err) {

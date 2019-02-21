@@ -6,7 +6,7 @@ var SettingsModel = require('../../web/models/Settings.model.js');
 // App List State of State Settings
 exports.AppStateSettings_List = (req, res) => {
    var ReceivingData = req.body;
-   SettingsModel.StateSettingSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt : -1}})
+   SettingsModel.StateSettingSchema.find({IfDeleted: false}, {}, {sort: {UpdatedAt : -1}})
    .exec((err, result) => {
       if(err) {
          res.status(417).send({Status: false, Message: 'Error in finding states'});
@@ -25,7 +25,7 @@ exports.AppDistrictSettings_List = (req, res) => {
       res.status(400).send({Status: false, Message: 'State Detail can\'t be empty'});
    } else {
       SettingsModel.DistrictSettingSchema
-      .find({IfDeleted: false, State: mongoose.Types.ObjectId(ReceivingData.State_Id)}, {}, {$sort: {UpdatedAt: -1}})
+      .find({IfDeleted: false, State: mongoose.Types.ObjectId(ReceivingData.State_Id)}, {}, {sort: {UpdatedAt: -1}})
       .populate({ path: 'State', select: ['StateName'] })
       .exec((err, result) => {
          if(err) {
@@ -46,7 +46,7 @@ exports.AppZoneSettings_List = (req, res) => {
       res.status(400).send({Status: false, Message: 'District Detail can\'t be empty'});
    } else {
       SettingsModel.ZoneSettingSchema
-      .find({IfDeleted: false, District: mongoose.Types.ObjectId(ReceivingData.District_Id)}, {}, {$sort: {UpdatedAt: -1}})
+      .find({IfDeleted: false, District: mongoose.Types.ObjectId(ReceivingData.District_Id)}, {}, {sort: {UpdatedAt: -1}})
       .populate({ path: 'State', select: ['StateName'] })
       .populate({ path: 'District', select: ['DistrictName'] })
       .exec((err, result) => {
@@ -68,7 +68,7 @@ exports.AppBranchSettings_List = (req, res) => {
       res.status(400).send({Status: false, Message: 'Zone Detail can\'t be empty'});
    } else {
       SettingsModel.BranchSettingSchema
-      .find({IfDeleted: false, Zone: mongoose.Types.ObjectId(ReceivingData.Zone_Id)}, {}, {$sort: {UpdatedAt: -1}})
+      .find({IfDeleted: false, Zone: mongoose.Types.ObjectId(ReceivingData.Zone_Id)}, {}, {sort: {UpdatedAt: -1}})
       .populate({ path: 'State', select: ['StateName'] })
       .populate({ path: 'District', select: ['DistrictName'] })
       .populate({ path: 'Zone', select: ['ZoneName'] })
@@ -91,7 +91,7 @@ exports.AppConstitutionSetting_List = (req, res) => {
       res.status(400).send({Status: false, Message: 'Branch Detail can\'t be empty'});
    } else {
       SettingsModel.ConstitutionSettingSchema
-      .find({IfDeleted: false, Branch: mongoose.Types.ObjectId(ReceivingData.Branch_Id)}, {}, {$sort: {UpdatedAt: -1}})
+      .find({IfDeleted: false, Branch: mongoose.Types.ObjectId(ReceivingData.Branch_Id)}, {}, {sort: {UpdatedAt: -1}})
       .populate({ path: 'Branch', select: ['BranchName'] })
       .exec((err, result) => {
          if(err) {
@@ -108,7 +108,7 @@ exports.AppConstitutionSetting_List = (req, res) => {
 // App Group Setting List
 exports.AppGroupSetting_List = (req, res) => {
    var ReceivingData = req.body;
-   SettingsModel.GroupSettingSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
+   SettingsModel.GroupSettingSchema.find({IfDeleted: false}, {}, {sort: {UpdatedAt: -1}})
    .exec((err, result) => {
       if(err) {
          res.status(417).send({Status: false, Message: 'Error in finding group'});
@@ -123,7 +123,7 @@ exports.AppGroupSetting_List = (req, res) => {
 // App Member Approval period List
 exports.AppMemberApprovalPeriodSetting_List = (req, res) => {
    var ReceivingData = req.body;
-   SettingsModel.MemberApprovalPeriodSettingSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
+   SettingsModel.MemberApprovalPeriodSettingSchema.find({IfDeleted: false}, {}, {sort: {UpdatedAt: -1}})
    .exec((err, result) => {
       if(err) {
          res.status(417).send({Status: false, Message: 'Error in listing Approval period'});
@@ -139,7 +139,8 @@ exports.AppMemberApprovalPeriodSetting_List = (req, res) => {
 // App Complaint Category List
 exports.AppComplaintCategorySetting_List = (req, res) => {
    var ReceivingData = req.body;
-   SettingsModel.ComplaintCategorySettingSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
+   SettingsModel.ComplaintCategorySettingSchema.find({IfDeleted: false}, {}, {sort: {UpdatedAt: -1}})
+   .populate({ path: 'ComplaintType', select: ['ComplaintCategory'] })
    .exec((err, result) => {
       if(err) {
          res.status(417).send({Status: false, Message: 'Error in listing Complaint Category'});
@@ -154,8 +155,8 @@ exports.AppComplaintCategorySetting_List = (req, res) => {
 // App List Advertisement Type Setting
 exports.AppAdvertisementTypeSetting_List = (req, res) => {
    var ReceivingData = req.body;
-   SettingsModel.AdvertisementTypeSettingSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
-   .exec((err, req) => {
+   SettingsModel.AdvertisementTypeSettingSchema.find({IfDeleted: false}, {}, {sort: {UpdatedAt: -1}})
+   .exec((err, result) => {
       if(err) {
          res.status(417).send({Status: false, Message: 'Error in creating Advertisement'});
       } else {
@@ -169,7 +170,7 @@ exports.AppAdvertisementTypeSetting_List = (req, res) => {
 // App List Booth Setting
 exports.AppBoothSetting_List = (req, res) => {
    var ReceivingData = req.body;
-   SettingsModel.BoothSettingSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
+   SettingsModel.BoothSettingSchema.find({IfDeleted: false}, {}, {sort: {UpdatedAt: -1}})
    .exec((err, result) => {
       if(err) {
          res.status(417).send({Status: false, Message: 'Error in creating booth'});
@@ -184,7 +185,7 @@ exports.AppBoothSetting_List = (req, res) => {
 // App List official designation Setting
 exports.AppOfficialDesignationSetting_List = (req, res) => {
    var ReceivingData = req.body;
-   SettingsModel.OfficialDesignationSettingSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
+   SettingsModel.OfficialDesignationSettingSchema.find({IfDeleted: false}, {}, {sort: {UpdatedAt: -1}})
    .exec((err, result) => {
       if(err) {
          res.status(417).send({Status: false, Message: 'Error in finding Official Designation'});
@@ -200,7 +201,7 @@ exports.AppOfficialDesignationSetting_List = (req, res) => {
 // App Relation Type Setting
 exports.AppRelationShipType_List = (req, res) => {
    var ReceivingData = req.body;
-   SettingsModel.RelationShipTypeSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
+   SettingsModel.RelationShipTypeSchema.find({IfDeleted: false}, {}, {sort: {UpdatedAt: -1}})
    .exec((err, result) => {
       if(err) {
          res.status(417).send({Status: false, Message: 'Error in finding Relationship Type'});

@@ -441,13 +441,13 @@ exports.BranchSettings_Delete = (req, res) => {
 // Constitution Setting Create
 exports.ConstitutionSetting_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.BranchSetting_Id || ReceivingData.BranchSetting_Id === '' || ReceivingData.BranchSetting_Id === null) {
+   if(!ReceivingData.Branch_Id || ReceivingData.Branch_Id === '' || ReceivingData.Branch_Id === null) {
       res.status(400).send({Status: false, Message: 'Branch details can\'t bew empty'});
    } else if(!ReceivingData.ConstitutionName || ReceivingData.ConstitutionName === '' || ReceivingData.ConstitutionName === null) {
       res.status(400).send({Status: false, Message: 'Constitution details can\'t bew empty'});
    } else {
       var Create_ConstitutionSetting = new SettingsModel.ConstitutionSettingSchema({
-         Branch: mongoose.Types.ObjectId(ReceivingData.BranchSetting_Id),
+         Branch: mongoose.Types.ObjectId(ReceivingData.Branch_Id),
          ConstitutionName: ReceivingData.ConstitutionName,
          Message: ReceivingData.Message,
          IfDeleted: false,
@@ -1231,9 +1231,7 @@ exports.OfficialDesignationSetting_Delete = (req, res) => {
 // Create
 exports.RelationShipType_Create = (req, res) => {
    var ReceivingData = req.body.Info;
-   if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-      res.status(400).send({Status: false, Message: 'User details can\'t be empty' });
-   } else if(!ReceivingData.RelationShipName || ReceivingData.RelationShipName === '' || ReceivingData.RelationShipName === null) {
+   if(!ReceivingData.RelationShipName || ReceivingData.RelationShipName === '' || ReceivingData.RelationShipName === null) {
       res.status(400).send({Status: false, Message: 'Relation Ship Name can\'t be empty' });
    } else {
       var Create_RelationShipType = new SettingsModel.RelationShipTypeSchema({

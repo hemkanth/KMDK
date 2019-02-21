@@ -7,10 +7,10 @@ var axios = require('axios');
 // Image
 var MemberImageStorage = multer.diskStorage({
     destination: (req, res, cb) => {
-        cb(null, './Uploads/Advertisement');
+        cb(null, './Uploads/Member');
     },
     filename: (req, res, cb) => {
-        cb(null, 'Advertisement_' + Date.now() + '.png');
+        cb(null, 'Member_' + Date.now() + '.png');
     }
 });
 
@@ -71,6 +71,12 @@ exports.AppMembersOTP_Validate = (req, res) => {
         res.status(400).send({Status: false, Message: 'OTP can\'t be empty' });
     } else {
         MembersModel.MembersSchema.findOne({IfDeleted: false, ActiveStatus: true, MobileNumber: { $regex : new RegExp("^" + ReceivingData.MobileNumber + "$", "i")}, Member_Status: "Approved", OTP: { $regex : new RegExp("^" + ReceivingData.OTP + "$", "i")}}, {})
+        .populate({ path: 'State', select: ['StateName'] })
+        .populate({ path: 'District', select: ['DistrictName'] })
+        .populate({ path: 'Zone', select: ['ZoneName'] })
+        .populate({ path: 'Branch', select: ['BranchName'] })
+        .populate({ path: 'CreatedBy', select: ['Name'] })
+        .populate({ path: 'UpdatedBy', select: ['Name'] })
         .exec((err, result) => {
             if(err) {
                 res.status(417).send({Status: false, Message: 'Error in OTP validation' });
@@ -146,14 +152,14 @@ exports.AppMembers_Create = (req, res) => {
                         res.status(417).send({Status: false, Message: 'Error in generating Member ID Number' });
                     } else {
                         var number = (LengthResult.length > 0) ? parseInt(LengthResult[0].MemberIdLength) + 1 : 1;
-                        var LastNumber = number.toString().padStart(4);
+                        var LastNumber = number.toString().padStart(4, 0);
                         var ReferenceId = 'KMDK' + LastNumber;
                         var tempMemberImage = {};
                         if(req.file !== null && req.file !== undefined && req.file !== '') {
                             tempMemberImage = { filename: req.file.filename, mimetype: req.file.mimetype, size: req.file.size};
                         }
                         var tempSubCaste  = (ReceivingData.If_Committee) ? ReceivingData.SubCaste : null; 
-                        var ReceivingDataUser_Id = (ReceivingData.User_Id === '' || ReceivingData.User_Id === null) ? null : mongoose.Types.ObjectId(ReceivingData.User_Id); 
+                        var ReceivingDataUser_Id = (!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) ? null : mongoose.Types.ObjectId(ReceivingData.User_Id); 
                         var Create_Members = new MembersModel.MembersSchema({
                             MemberImage: tempMemberImage,
                             MemberIdLength: parseInt(LastNumber),

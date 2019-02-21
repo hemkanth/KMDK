@@ -54,9 +54,7 @@ exports.AppComplaint_Create = (req, res) => {
             console.log('Unknown Err , ' + UploadErr);
         } else {
             var ReceivingData = req.body;
-            if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-                res.status(400).send({Status: false, Message: 'User Details can\'t be empty' });
-            } else if(!ReceivingData.Name || ReceivingData.Name === '' || ReceivingData.Name === null) {
+            if(!ReceivingData.Name || ReceivingData.Name === '' || ReceivingData.Name === null) {
                 res.status(400).send({Status: false, Message: 'Name can\'t be empty' });
             } else if(!ReceivingData.MobileNumber || ReceivingData.MobileNumber === '' || ReceivingData.MobileNumber === null) {
                 res.status(400).send({Status: false, Message: 'Mobile Number can\'t be empty' });
@@ -68,14 +66,6 @@ exports.AppComplaint_Create = (req, res) => {
                 res.status(400).send({Status: false, Message: 'Message can\'t be empty' });
             } else if(!ReceivingData.Place || ReceivingData.Place === '' || ReceivingData.Place === null) {
                 res.status(400).send({Status: false, Message: 'Place Details can\'t be empty' });
-            } else if(!ReceivingData.State_Id || ReceivingData.State_Id === '' || ReceivingData.State_Id === null) {
-                res.status(400).send({Status: false, Message: 'State Details can\'t be empty' });
-            } else if(!ReceivingData.District_Id || ReceivingData.District_Id === '' || ReceivingData.District_Id === null) {
-                res.status(400).send({Status: false, Message: 'District Details can\'t be empty' });
-            } else if(!ReceivingData.Zone_Id || ReceivingData.Zone_Id === '' || ReceivingData.Zone_Id === null) {
-                res.status(400).send({Status: false, Message: 'Zone Details can\'t be empty' });
-            } else if(!ReceivingData.Branch_Id || ReceivingData.Branch_Id === '' || ReceivingData.Branch_Id === null) {
-                res.status(400).send({Status: false, Message: 'Branch Details can\'t be empty' });
             } else {
                 var tempComplaintImage = {};
                 var tempComplaintVideo = {};
@@ -89,6 +79,7 @@ exports.AppComplaint_Create = (req, res) => {
                 if(req.files.ComplaintAudio !== null && req.files.ComplaintAudio !== undefined && req.files.ComplaintAudio !== '') {
                     tempComplaintAudio = { filename: req.files.ComplaintAudio[0].filename, mimetype: req.files.ComplaintAudio[0].mimetype, size: req.files.ComplaintAudio[0].size};
                 }
+                var tempUserId = (!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) ? null : mongoose.Types.ObjectId(ReceivingData.User_Id);
                 var Create_Complaint = new ComplaintModel.ComplaintSchema({
                     Name :  ReceivingData.Name,
                     MobileNumber: ReceivingData.MobileNumber,
@@ -99,15 +90,11 @@ exports.AppComplaint_Create = (req, res) => {
                     ComplaintVideo : tempComplaintVideo,
                     ComplaintAudio : tempComplaintAudio,
                     Place : ReceivingData.Place,
-                    State: mongoose.Types.ObjectId(ReceivingData.State_Id),
-                    District: mongoose.Types.ObjectId(ReceivingData.District_Id),
-                    Zone: mongoose.Types.ObjectId(ReceivingData.Zone_Id),
-                    Branch: mongoose.Types.ObjectId(ReceivingData.Branch_Id),
                     CreatedAt: new Date(),
                     UpdatedAt: new Date(),
                     IfDeleted: false,
-                    CreatedBy: mongoose.Types.ObjectId(ReceivingData.User_Id),
-                    UpdatedBy : mongoose.Types.ObjectId(ReceivingData.User_Id) 
+                    CreatedBy: tempUserId,
+                    UpdatedBy : tempUserId 
                 });
                 Create_Complaint.save((err, result) => {
                     if(err) {
@@ -125,10 +112,7 @@ exports.AppComplaint_Create = (req, res) => {
 exports.AppComplaint_List = (req, res) => {
     var ReceivingData = req.body;
     ComplaintModel.ComplaintSchema.find({IfDeleted: false}, {}, {$sort: {UpdatedAt: -1}})
-    .populate({ path: 'State', select: ['StateName'] })
-    .populate({ path: 'District', select: ['DistrictName'] })
-    .populate({ path: 'Zone', select: ['ZoneName'] })
-    .populate({ path: 'Branch', select: ['BranchName'] })
+    .populate({ path: 'ComplaintType', select: ['ComplaintCategory'] })
     .populate({ path: 'CreatedBy', select: ['Name'] })
     .populate({ path: 'UpdatedBy', select: ['Name'] })
     .exec((err, result) => {
@@ -147,10 +131,6 @@ exports.AppComplaint_View = (req, res) => {
         res.status(400).send({Status: false, Message: 'Complaint Details can\'t be empty'});
     } else {
         ComplaintModel.ComplaintSchema.findOne({IfDeleted: false, _id: mongoose.Types.ObjectId(ReceivingData.Complaint_Id)}, {}, {})
-        .populate({ path: 'State', select: ['StateName'] })
-        .populate({ path: 'District', select: ['DistrictName'] })
-        .populate({ path: 'Zone', select: ['ZoneName'] })
-        .populate({ path: 'Branch', select: ['BranchName'] })
         .populate({ path: 'CreatedBy', select: ['Name'] })
         .populate({ path: 'UpdatedBy', select: ['Name'] })
         .exec((err, result) => {
@@ -172,9 +152,7 @@ exports.AppComplaint_Edit = (req, res) => {
             console.log('Unknown Err , ' + UploadErr);
         } else {
             var ReceivingData = req.body;
-            if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-                res.status(400).send({Status: false, Message: 'User Details can\'t be empty' });
-            } else if(!ReceivingData.Complaint_Id || ReceivingData.Complaint_Id === '' || ReceivingData.Complaint_Id === null) {
+            if(!ReceivingData.Complaint_Id || ReceivingData.Complaint_Id === '' || ReceivingData.Complaint_Id === null) {
                 res.status(400).send({Status: false, Message: 'Complaint Details can\'t be empty' });
             } else if(!ReceivingData.Name || ReceivingData.Name === '' || ReceivingData.Name === null) {
                 res.status(400).send({Status: false, Message: 'Name can\'t be empty' });
@@ -188,14 +166,6 @@ exports.AppComplaint_Edit = (req, res) => {
                 res.status(400).send({Status: false, Message: 'Message can\'t be empty' });
             } else if(!ReceivingData.Place || ReceivingData.Place === '' || ReceivingData.Place === null) {
                 res.status(400).send({Status: false, Message: 'Place Details can\'t be empty' });
-            } else if(!ReceivingData.State_Id || ReceivingData.State_Id === '' || ReceivingData.State_Id === null) {
-                res.status(400).send({Status: false, Message: 'State Details can\'t be empty' });
-            } else if(!ReceivingData.District_Id || ReceivingData.District_Id === '' || ReceivingData.District_Id === null) {
-                res.status(400).send({Status: false, Message: 'District Details can\'t be empty' });
-            } else if(!ReceivingData.Zone_Id || ReceivingData.Zone_Id === '' || ReceivingData.Zone_Id === null) {
-                res.status(400).send({Status: false, Message: 'Zone Details can\'t be empty' });
-            } else if(!ReceivingData.Branch_Id || ReceivingData.Branch_Id === '' || ReceivingData.Branch_Id === null) {
-                res.status(400).send({Status: false, Message: 'Branch Details can\'t be empty' });
             } else {
                 var tempComplaintImage = {};
                 var tempComplaintVideo = {};
@@ -209,6 +179,7 @@ exports.AppComplaint_Edit = (req, res) => {
                 if(req.files.ComplaintAudio !== null && req.files.ComplaintAudio !== undefined && req.files.ComplaintAudio !== '') {
                     tempComplaintAudio = { filename: req.files.ComplaintAudio[0].filename, mimetype: req.files.ComplaintAudio[0].mimetype, size: req.files.ComplaintAudio[0].size};
                 }
+                var tempUserId = (!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) ? null : mongoose.Types.ObjectId(ReceivingData.User_Id);
                 ComplaintModel.ComplaintSchema.updateMany({IfDeleted: false, _id: mongoose.Types.ObjectId(ReceivingData.Complaint_Id)}, 
                 {$set: {
                     Name :  ReceivingData.Name,
@@ -220,13 +191,9 @@ exports.AppComplaint_Edit = (req, res) => {
                     ComplaintVideo : tempComplaintVideo,
                     ComplaintAudio : tempComplaintAudio,
                     Place : ReceivingData.Place,
-                    State: mongoose.Types.ObjectId(ReceivingData.State_Id),
-                    District: mongoose.Types.ObjectId(ReceivingData.District_Id),
-                    Zone: mongoose.Types.ObjectId(ReceivingData.Zone_Id),
-                    Branch: mongoose.Types.ObjectId(ReceivingData.Branch_Id),
                     UpdatedAt: new Date(),
                     IfDeleted: false,
-                    UpdatedBy : mongoose.Types.ObjectId(ReceivingData.User_Id) 
+                    UpdatedBy : tempUserId 
                 }}, {})
                 .exec((err, result) => {
                     if(err) {
@@ -243,15 +210,14 @@ exports.AppComplaint_Edit = (req, res) => {
 // Complaint delete
 exports.AppComplaint_Delete = (req, res) => {
     var ReceivingData = req.body;
-    if(!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) {
-        res.status(400).send({Status: false, Message: 'User Details can\'t be empty'});
-    } else if(!ReceivingData.Complaint_Id || ReceivingData.Complaint_Id === '' || ReceivingData.Complaint_Id === null) {
+    if(!ReceivingData.Complaint_Id || ReceivingData.Complaint_Id === '' || ReceivingData.Complaint_Id === null) {
         res.status(400).send({Status: false, Message: 'Complaint Details can\'t be empty'});
     } else {
+        var tempUserId = (!ReceivingData.User_Id || ReceivingData.User_Id === '' || ReceivingData.User_Id === null) ? null : mongoose.Types.ObjectId(ReceivingData.User_Id);
         ComplaintModel.ComplaintSchema.updateMany({IfDeleted: false, _id: mongoose.Types.ObjectId(ReceivingData.Complaint_Id)}, 
         {$set: {
             IfDeleted: true, 
-            UpdatedBy: mongoose.Types.ObjectId(ReceivingData.User_Id)
+            UpdatedBy: tempUserId
         }}, {})
         .exec((err, result) => {
             if(err) {
