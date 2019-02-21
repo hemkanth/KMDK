@@ -1,10 +1,10 @@
-<div class="District_Section"> 
+<div class="User_Section"> 
     <p *ngIf="confirmbtn==true" class="card card-block card-header successfrm" >Confirmed</p>
     <p *ngIf="declinebtn==true" class="card card-block card-header declinefrm" >Declined</p>
       <!-- <pre class="card card-block card-header" ng-init="message = false">{{message}}</pre> -->
     <div class="side-heading">
-      <h3>விளம்பரம்</h3> 
-      <button type="button" class="btn btn-success create-btn" (click)="openCreateModal(createtemplate)">புதிய விளம்பரம் சேர்க்கவும்</button>
+      <h3>பயனர்கள்</h3> 
+      <button type="button" class="btn btn-success create-btn" (click)="openCreateModal(createtemplate)">புதிய பயனர் சேர்க்கவும்</button>
      <!-- -----------check box------------------ -->
      <!-- <div ng-app="">
       <form>
@@ -73,7 +73,7 @@
                   <!-- Delete Modal  -->
                   <ng-template #deletetemplate>
                       <div class="modal-header">
-                          <h4 class="modal-title pull-left modalheading">விளம்பரம் நீக்கு </h4>
+                          <h4 class="modal-title pull-left modalheading">பயனர் நீக்கு </h4>
                         </div>
                       <div class="modal-body text-center del-title">
                         <p>நீங்கள் உறுதிப்படுத்த விரும்புகிறீர்களா</p>
@@ -84,30 +84,30 @@
                     <!-- Delete Modal  -->
                   <ng-template #edittemplate>
                     <div class="modal-header">
-                      <h4 class="modal-title pull-left modalheading">விளம்பரம் மேம்படுத்தல்</h4>
+                      <h4 class="modal-title pull-left modalheading">பயனர் மேம்படுத்தல்</h4>
                     </div>
                       <div class="modal-body text-center">
                           <div class="form-section">
                             <form [formGroup]="editForm">                                                      
                               <div class="frm-field">
-                                  <div class="frm-lbl">விளம்பரப் பெயர்</div>
-                                  <div class="frm-input"><input formControlName="District" /></div>
-                              </div>                             
+                                  <div class="frm-lbl">பயனர் பெயர்</div>
+                                  <div class="frm-input"><input formControlName="Username" /></div>
+                              </div> 
                               <div class="frm-field">
-                                  <div class="frm-lbl">தேதி </div>
-                                  <div class="frm-input"><input tyype="date" formControlName="Date" /></div>
+                                  <div class="frm-lbl">பெயர்</div>
+                                  <div class="frm-input"><input formControlName="Name" /></div>
+                              </div> 
+                              <div class="frm-field">
+                                  <div class="frm-lbl">தொடர்பு எண்</div>
+                                  <div class="frm-input"><input formControlName="ContactNumber" /></div>
                               </div>
                               <div class="frm-field">
-                                  <div class="frm-lbl">வகை </div>
-                                  <div class="frm-input"><input formControlName="Type" /></div>
-                              </div>
+                                  <div class="frm-lbl">கடவுச்சொல்</div>
+                                  <div class="frm-input"><input type="password" formControlName="Password" /></div>
+                              </div> 
                               <div class="frm-field">
-                                  <div class="frm-lbl">இடம் </div>
-                                  <div class="frm-input"><input formControlName="Place" /></div>
-                              </div>
-                              <div class="frm-field">
-                                  <div class="frm-lbl">பதாகை </div>
-                                  <div class="frm-input"><input type="file" formControlName="Banner" /></div>
+                                  <div class="frm-lbl">கடவுச்சொல்லை உறுதிப்படுத்துக</div>
+                                  <div class="frm-input"><input type="password" formControlName="Confirmpwd" /></div>
                               </div>                              
                             </form>                         
                           </div>
@@ -121,7 +121,7 @@
                     <!-- View Modal -->
                   <ng-template #viewtemplate>
                       <div class="modal-header">
-                        <h4 class="modal-title pull-left modalheading">விளம்பரம் விவரம்</h4>
+                        <h4 class="modal-title pull-left modalheading">பயனர் விவரம்</h4>
                         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -130,11 +130,9 @@
                           <div class="form-section">
                               <div class="form">                              
                                 <div class="icon">                                                               
-                                    <p>விளம்பரப் பெயர் : நாமக்கல்</p>                                   
-                                    <p>தேதி : 01/12/2018</p>
-                                    <p>வகை : </p>
-                                    <p>இடம் : பொள்ளாச்சி</p>
-                                    <p>பதாகை : </p>
+                                    <p>பயனர் பெயர் : நாமக்கல்</p>     
+                                    <p>பெயர் : </p> 
+                                    <p>தொடர்பு எண் : </p>                             
                                 </div>                              
                               </div>
                             </div>
@@ -143,31 +141,31 @@
                     <!--  Create New District -->
                     <ng-template #createtemplate>
                       <div class="modal-header">
-                        <h4 class="modal-title pull-left modalheading">விளம்பரம் சேர்க்க</h4>
+                        <h4 class="modal-title pull-left modalheading">பயனர் சேர்க்க</h4>
                       </div>
                         <div class="modal-body text-center">
                             <div class="form-section">
                               <form [formGroup]="editForm">                                                      
-                                  <div class="frm-field">
-                                      <div class="frm-lbl">விளம்பரப் பெயர்</div>
-                                      <div class="frm-input"><input formControlName="District" /></div>
-                                  </div>                             
-                                  <div class="frm-field">
-                                      <div class="frm-lbl">தேதி </div>
-                                      <div class="frm-input"><input tyype="date" formControlName="Date" /></div>
-                                  </div>
-                                  <div class="frm-field">
-                                      <div class="frm-lbl">வகை </div>
-                                      <div class="frm-input"><input formControlName="Type" /></div>
-                                  </div>
-                                  <div class="frm-field">
-                                      <div class="frm-lbl">இடம் </div>
-                                      <div class="frm-input"><input formControlName="Place" /></div>
-                                  </div>
-                                  <div class="frm-field">
-                                      <div class="frm-lbl">பதாகை </div>
-                                      <div class="frm-input"><input type="file" formControlName="Banner" /></div>
-                                  </div>                            
+                                <div class="frm-field">
+                                    <div class="frm-lbl">பயனர் பெயர்</div>
+                                    <div class="frm-input"><input formControlName="Username" /></div>
+                                </div>  
+                                <div class="frm-field">
+                                    <div class="frm-lbl">பெயர்</div>
+                                    <div class="frm-input"><input formControlName="Name" /></div>
+                                </div> 
+                                <div class="frm-field">
+                                    <div class="frm-lbl">தொடர்பு எண்</div>
+                                    <div class="frm-input"><input formControlName="ContactNumber" /></div>
+                                </div>
+                                <div class="frm-field">
+                                    <div class="frm-lbl">கடவுச்சொல்</div>
+                                    <div class="frm-input"><input type="password" formControlName="Password" /></div>
+                                </div> 
+                                <div class="frm-field">
+                                    <div class="frm-lbl">கடவுச்சொல்லை உறுதிப்படுத்துக</div>
+                                    <div class="frm-input"><input type="password" formControlName="Confirmpwd" /></div>
+                                </div>                                
                               </form>                         
                             </div>
                         </div>

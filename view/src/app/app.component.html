@@ -7,7 +7,16 @@
         </div>
         <div class="logo">
           <img src="../assets/images/logo.png" />
-          <div class="right-icon">                        
+          <div class="right-icon">       
+            <div class="language_select">
+                <ng-select  class="ng-select ng-select-single" [items]="languagelist"
+                    bindLabel="label"
+                    bindValue="value"
+                    placeholder="மொழி தேர்வு"
+                    (change)="getlanguage($event.value)"  style="font-size:12px !important;">
+                </ng-select>                
+            </div>       
+            <div class="notification-detail">
                 <i class="fa fa-bell" [matMenuTriggerFor]="menu"> </i><span class="notify">10</span>
                 <mat-menu #menu="matMenu" class="top-notify">
                         <a mat-menu-item>
@@ -42,6 +51,7 @@
                         </a>                         
                       </mat-menu> 
                 <a href="#">நிர்வாகி</a>
+            </div>
             </div>            
         </div>
         
@@ -51,8 +61,8 @@
         <div class="container-fluid">
           <div class="row">
             <div class="side_nav">
-                <ul class="nav-menu">
-                    <a [routerLink]="['/dashboard']"><li>புள்ளிவிவரங்கள்</li></a>                
+                <ul class="nav-menu" *ngIf="menulanguage!='english'">                                        
+                    <a [routerLink]="['/dashboard']"><li>புள்ளிவிவரங்கள்</li></a>                                    
                     <div class="dropdown">
                         <button class="dropbtn">உறுப்பினர்கள் 
                           <i class="fa fa-caret-down"></i>
@@ -86,7 +96,16 @@
                             <a [routerLink]="['/addressed-complaints-list']">கூறப்பட்ட புகார்கள்</a>
                         </div>
                     </div>      -->
-                    <a [routerLink]="['/gallery-list']"><li>புகைப்பட தொகுப்பு</li></a>
+                    <div class="dropdown">
+                        <button class="dropbtn">புகைப்பட தொகுப்புகள்
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/album-list']">ஆல்பம்</a>
+                            <a [routerLink]="['/gallery-list']">புகைப்பட தொகுப்புகள்</a>
+                        </div>
+                    </div> 
+                    <!-- <a [routerLink]="['/gallery-list']"><li>புகைப்பட தொகுப்பு</li></a> -->
                     <a [routerLink]="['/downloads']"><li>பதிவிறக்கம்</li></a>            
                     <a [routerLink]="['/advertisement-list']"><li>செய்தி தொகுப்பு</li></a>
                     <a [routerLink]="['/party-affiliation']"><li>கட்சி சேர்ப்பு</li></a>                                
@@ -123,10 +142,86 @@
                             <a [routerLink]="['/booth-list']" routerLinkActive="router-link-active" >சாவடி</a>
                         </div>
                     </div>
-                     <a [routerLink]="['/dashboard']"><li>பயனர் மேலாண்மை</li></a>               
+                     <a [routerLink]="['/user-management']"><li>பயனர் மேலாண்மை</li></a>               
                     <a [routerLink]="['/dashboard']"><li>பயனர் அனுமதி</li></a> 
                      
+                </ul>
+                <ul class="nav-menu engmenu" *ngIf="menulanguage=='english'">                                        
+                    <a [routerLink]="['/dashboard']"><li>Dashboard</li></a>                                    
+                    <div class="dropdown">
+                        <button class="dropbtn">Members 
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                          <a [routerLink]="['/members-list']">Members</a>
+                          <a [routerLink]="['/member-approval-list']">Members Approved</a>
+                          <a [routerLink]="['/member-approved-list']">Pending Requests</a>
+                          <a [routerLink]="['/member-rejected-list']" routerLinkActive="router-link-active">Rejected Members</a>
+                          <!-- <a href="#">உறுப்பினர்கள் அறிக்கை</a> -->
+                          <a [routerLink]="['/member-idcard-print']">ID Card print</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">Officials 
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/officials-list']">Officials</a>
+                            <a href="#">Officials Report</a>
+                        </div>
+                    </div> 
+                    <a [routerLink]="['/events-list']"><li>Events</li></a>
+                    <a [routerLink]="['/registered-complaints-list']"><li>Complaints</li></a>                    
+                    <div class="dropdown">
+                        <button class="dropbtn">Gallery
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/album-list']">Album</a>
+                            <a [routerLink]="['/gallery-list']">Gallery</a>
+                        </div>
+                    </div> 
+                    <a [routerLink]="['/downloads']"><li>Downloads</li></a>            
+                    <a [routerLink]="['/advertisement-list']"><li>Advertisements</li></a>
+                    <a [routerLink]="['/party-affiliation']"><li>Party Affiliation</li></a>                                
+                    <!-- <a [routerLink]="['/activity']"><li>நடவடிக்கைகள்</li></a> -->
+                    <a [routerLink]="['/enquiry-list']"><li>Enquiries</li></a>  
+                    <a [routerLink]="['/division-officials']"><li>Division Officials</li></a> 
+                    <a [routerLink]="['/branch-certificate']"><li>Branch Certificate</li></a>
+                    <a [routerLink]="['/dashboard']"><li>Citizen Register</li></a>                 
+                    <!-- <div class="dropdown">
+                        <button class="dropbtn">குடிமகன் பதிவு 
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/district-list']">பயன்பாடு நிரல் இடைமுகம் </a>
+                            <a [routerLink]="['/zone-list']">படம்</a>                        
+                        </div>
+                    </div>            -->
+                    <div class="dropdown">
+                        <button class="dropbtn">Configuration 
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a [routerLink]="['/state-list']" routerLinkActive="router-link-active" >State</a>
+                            <a [routerLink]="['/district-list']">District </a>
+                            <a [routerLink]="['/zone-list']">Zone</a>
+                            <a [routerLink]="['/branch-list']">Branch</a>
+                            <a [routerLink]="['/constituency-list']">Constituency</a>
+                            <a [routerLink]="['/division-list']">Division </a>
+                            <a [routerLink]="['/official-designation']" routerLinkActive="router-link-active" >Official Designation</a>
+                            <a [routerLink]="['/member-approval-period']" routerLinkActive="router-link-active" >Member Approval Period</a>                            
+                            <a [routerLink]="['/complaint-category']" routerLinkActive="router-link-active" >Complaint Category</a>
+                            <a [routerLink]="['/advertisement-type']" routerLinkActive="router-link-active" >Advertisement Type</a>
+                            <a [routerLink]="['/relationship-type']" routerLinkActive="router-link-active" >Relationship Type</a>
+                            <a [routerLink]="['/booth-list']" routerLinkActive="router-link-active" >Booth</a>
+                        </div>
+                    </div>
+                     <a [routerLink]="['/user-management']"><li>User Management</li></a>               
+                    <a [routerLink]="['/dashboard']"><li>User Permissions</li></a> 
+                     
                 </ul> 
+             
             </div>
           </div>      
         </div>

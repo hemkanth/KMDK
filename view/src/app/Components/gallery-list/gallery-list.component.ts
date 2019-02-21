@@ -23,6 +23,13 @@ export class GalleryListComponent implements OnInit {
   confirmbtn: Boolean = false;
   declinebtn: Boolean = false;
   editForm: FormGroup;
+  Albumlist: any[] = [
+    {label: 'துடியலூர்', value: 'Namakkal'},
+    {label: 'பெரியநாயக்கன்பாளையம்', value: 'Karur'},
+    {label: 'கவுண்டம்பாளையம்', value: 'Pollachi'},
+    {label: 'ஆனைமலை', value: 'Madurai'},
+    {label: 'கோட்டூர்', value: 'Coimbatore'}
+  ];
   constructor(private modalService: BsModalService) { }
 
   ngOnInit(): void {

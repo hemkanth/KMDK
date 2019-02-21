@@ -35,7 +35,8 @@ export class EventsListComponent implements OnInit {
       Place: new FormControl(null, [Validators.required]),
       EventDate: new FormControl(null, [Validators.required]),
       ContactPerson: new FormControl(null),
-      ContactNumber: new FormControl(null)
+      ContactNumber: new FormControl(null),
+      eventpic: new FormControl(null)
     });
   }
   openDeleteModal(deletetemplate: TemplateRef<any>) {

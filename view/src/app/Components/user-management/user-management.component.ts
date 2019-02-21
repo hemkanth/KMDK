@@ -5,41 +5,40 @@ import {FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { PageEvent } from '@angular/material';
+import { MatFormField, MatFormFieldControl } from '@angular/material';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @Component({
-  selector: 'app-division-officials',
-  templateUrl: './division-officials.component.html',
-  styleUrls: ['./division-officials.component.css']
+  selector: 'app-user-management',
+  templateUrl: './user-management.component.html',
+  styleUrls: ['./user-management.component.css']
 })
-export class DivisionOfficialsComponent implements OnInit {
+export class UserManagementComponent implements OnInit {
+
   modalRef: BsModalRef;
   message: string;
   confirmbtn: Boolean = false;
   declinebtn: Boolean = false;
   editForm: FormGroup;
-  Divisionlist: any[] = [
-    {label: 'நாமக்கல்', value: 'Namakkal'},
-    {label: 'கரூர்', value: 'Karur'},
-    {label: 'பொள்ளாச்சி', value: 'Pollachi'},
-    {label: 'மதுரை', value: 'Madurai'},
-    {label: 'கோயம்புத்தூர்', value: 'Coimbatore'}
-  ];
-  Userlist: any[] = [
-    {label: 'நிர்வாகி 1', value: '1'},
-    {label: 'நிர்வாகி 2', value: '2'},
-    {label: 'நிர்வாகி 3', value: '3'},
-    {label: 'நிர்வாகி 4', value: '4'},
-    {label: 'நிர்வாகி 5', value: '5'}
-  ];
-  constructor(private modalService: BsModalService) { }
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
 
+  // MatPaginator Output
+  pageEvent: PageEvent;
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
+
+  constructor(private modalService: BsModalService) { }
   ngOnInit() {
     this.editForm = new FormGroup({
-      Name: new FormControl(null, [Validators.required, Validators.pattern('[A-Za-z]*')]),
+      Username: new FormControl(null, [Validators.required, Validators.pattern('[A-Za-z]*')]),
       ContactNumber: new FormControl(null, [Validators.required]),
-      Branch: new FormControl(null, [Validators.required])
+      Name: new FormControl(null, [Validators.required]),
+      Password: new FormControl(null, [Validators.required]),
+      ConfirmPwd: new FormControl(null, [Validators.required])
     });
   }
   openDeleteModal(deletetemplate: TemplateRef<any>) {
